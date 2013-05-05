@@ -1,0 +1,10 @@
+{
+  "name": "neat-test",
+  "description": "Neat tests with Mocha",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "mocha": "1.1.x",
+    "should": "1.1.x"
+  }
+}
