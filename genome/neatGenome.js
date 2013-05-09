@@ -12,13 +12,13 @@
     var neatConnection = isBrowser ? selfBrowser['neatConnection'] : require('./neatConnection.js');
     var neatNode = isBrowser ? selfBrowser['neatNode'] : require('./neatNode.js');
     //if we need a node object, this is how we would do it
-    var utilities = isBrowser ? selfBrowser['utilities'] : require('../../CPPN.js/utility/utilities.js');
+    var utilities = isBrowser ? selfBrowser['utilities'] : require('../cppnjs/utility/utilities.js');
     var neatHelp = isBrowser ? selfBrowser['neatHelp'] : require('../neatHelp/neatHelp.js');
     var neatGenome = exports;
-    var cppnNode = isBrowser ? selfBrowser['cppnNode'] : require('../../CPPN.js/components/cppnNode.js');
+    var cppnNode = isBrowser ? selfBrowser['cppnNode'] : require('../cppnjs/components/cppnNode.js');
     var neatParameters =  isBrowser ? selfBrowser['neatParameters'] : require('../neatHelp/neatParameters.js');
     var neatDecoder =  isBrowser ? selfBrowser['neatDecoder'] : require('../neatHelp/neatDecoder.js');
-    var cppnActivationFactory =  isBrowser ? selfBrowser['cppnActivationFactory'] : require('../../CPPN.js/activationFunctions/cppnActivationFactory.js');
+    var cppnActivationFactory =  isBrowser ? selfBrowser['cppnActivationFactory'] : require('../cppnjs/activationFunctions/cppnActivationFactory.js');
 
 //var ngNSS = "Neat.Genome";
 //var ngNS = namespace(ngNSS);

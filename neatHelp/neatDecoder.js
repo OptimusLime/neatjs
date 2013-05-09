@@ -5,9 +5,9 @@
     var activationFunctionArray = [];
 
     var neatDecoder = exports;
-    var cppnNode = isBrowser ? selfBrowser['cppnNode'] : require('../../CPPN.js/components/cppnNode.js');
-    var cppns = isBrowser ? selfBrowser['cppn'] : require('../../CPPN.js/cppns/cppn.js');
-    var cppnConnection = isBrowser ? selfBrowser['cppnConnection'] : require('../../CPPN.js/components/cppnConnection.js');
+    var cppnNode = isBrowser ? selfBrowser['cppnNode'] : require('../cppnjs/components/cppnNode.js');
+    var cppns = isBrowser ? selfBrowser['cppn'] : require('../cppnjs/cppns/cppn.js');
+    var cppnConnection = isBrowser ? selfBrowser['cppnConnection'] : require('../cppnjs/components/cppnConnection.js');
     var neatGenome = isBrowser ? selfBrowser['neatGenome'] : require('../genome/neatGenome.js');
 
 

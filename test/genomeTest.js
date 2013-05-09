@@ -13,11 +13,11 @@ describe('Creating a new genome',function(){
     var neatNode = require('../genome/neatNode.js');
     var neatConnection = require('../genome/neatConnection.js');
     var cantorPair = require('../utility/cantorPair');
-    var cppnActivationFactory = require('../../CPPN.js/activationFunctions/cppnActivationFactory.js');
+    var cppnActivationFactory = require('../cppnjs/activationFunctions/cppnActivationFactory.js');
     var neatParameters = require('../neatHelp/neatParameters.js');
-    var utilities = require('../../CPPN.js/utility/utilities.js');
+    var utilities = require('../cppnjs/utility/utilities.js');
     var neatHelp = require('../neatHelp/neatHelp.js');
-    var cppnNode = require('../../CPPN.js/components/cppnNode.js');
+    var cppnNode = require('../cppnjs/components/cppnNode.js');
 
     var crNode = function(gid){
         return new neatNode.NeatNode(gid,

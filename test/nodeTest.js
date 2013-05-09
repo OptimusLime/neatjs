@@ -2,8 +2,8 @@ var assert = require('assert');
 var should = require('should');
 
 var neatNode = require('../genome/neatNode.js');
-var neatActivationFactory = require('../../CPPN.js/activationFunctions/cppnActivationFactory.js');
-var cppnNode = require('../../CPPN.js/components/cppnNode.js');
+var neatActivationFactory = require('../cppnjs/activationFunctions/cppnActivationFactory.js');
+var cppnNode = require('../cppnjs/components/cppnNode.js');
 
 var testActivation = function(functionString, value, functionValue)
 {
