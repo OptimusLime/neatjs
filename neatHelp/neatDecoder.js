@@ -6,6 +6,7 @@
 
     var neatDecoder = exports;
     var cppnNode = isBrowser ? selfBrowser['cppnNode'] : require('../cppnjs/components/cppnNode.js');
+    var cppnActivationFactory = isBrowser ? selfBrowser['cppnNode'] : require('../cppnjs/activationFunctions/cppnActivationFactory.js');
     var cppns = isBrowser ? selfBrowser['cppn'] : require('../cppnjs/cppns/cppn.js');
     var cppnConnection = isBrowser ? selfBrowser['cppnConnection'] : require('../cppnjs/components/cppnConnection.js');
     var neatGenome = isBrowser ? selfBrowser['neatGenome'] : require('../genome/neatGenome.js');
@@ -13,8 +14,12 @@
 
     neatDecoder.DecodeToFloatFastConcurrentNetwork = function(ng, activationFunction)
     {
-        var outputNeuronCount = ng.outputNeuronCount;
+        var outputNeuronCount = ng.outputNodeCount;
         var neuronGeneCount = ng.nodes.length;
+
+        var biasList = [];
+        for(var b=0; b< neuronGeneCount; b++)
+            biasList.push(0);
 
         // Slightly inefficient - determine the number of bias nodes. Fortunately there is not actually
         // any reason to ever have more than one bias node - although there may be 0.
@@ -27,7 +32,7 @@
         var nodeIdx=0;
         for(; nodeIdx<neuronGeneCount; nodeIdx++)
         {
-            activationFunctionArray[nodeIdx] = ng.nodes[nodeIdx].activationFunction;
+            activationFunctionArray[nodeIdx] = cppnActivationFactory.Factory.getActivationFunction(ng.nodes[nodeIdx].activationFunction);
             if(ng.nodes[nodeIdx].type !=  cppnNode.NodeType.bias)
                 break;
         }
@@ -35,7 +40,8 @@
         var inputNeuronCount = ng.inputNodeCount;
         for (; nodeIdx < neuronGeneCount; nodeIdx++)
         {
-            activationFunctionArray[nodeIdx] = ng.nodes[nodeIdx].activationFunction;
+            activationFunctionArray[nodeIdx] = cppnActivationFactory.Factory.getActivationFunction(ng.nodes[nodeIdx].activationFunction);
+            biasList[nodeIdx] = ng.nodes[nodeIdx].bias;
         }
 
         // ConnectionGenes point to a neuron ID. We need to map this ID to a 0 based index for
@@ -86,7 +92,7 @@
 
         return new cppns.CPPN(biasNodeCount, inputNeuronCount,
             outputNeuronCount, neuronGeneCount,
-            fastConnectionArray, activationFunctionArray);
+            fastConnectionArray, biasList, activationFunctionArray);
 
     };
 

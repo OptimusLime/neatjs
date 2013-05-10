@@ -16,6 +16,14 @@
         self.sourceID = srcTgtObj.sourceID;
         self.targetID = srcTgtObj.targetID;
 
+        //learning rates and modulatory information contained here, not generally used or tested
+        self.a =0;
+        self.b =0;
+        self.c =0;
+        self.d =0;
+        self.modConnection=0;
+        self.learningRate=0;
+
         self.isMutated=false;
     };
 
