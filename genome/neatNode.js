@@ -11,11 +11,14 @@
 
         var self = this;
 
-        self.gid = gid;
-        self.activationFunction = aFunc;
+        self.gid = (typeof gid === 'string' ? parseFloat(gid) : gid);
+        //we only story the string of the activation funciton
+        //let cppns deal with actual act functions
+        self.activationFunction = aFunc.functionID || aFunc;
 
         self.type = typeObj.type;
-        self.layer = layer;
+
+        self.layer = (typeof layer === 'string' ? parseFloat(layer) : layer);
 
         self.bias = 0;
     };

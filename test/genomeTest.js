@@ -63,9 +63,9 @@ describe('Creating a new genome',function(){
         return {nodes: nodeList, connections: connectionList};
     };
 
-    var createSimpleGenome = function(ins, outs, weightRange, connProp){
+    var createSimpleGenome = function(ins, outs, weightRange, connProp, existing){
         return neatGenome.Help.CreateGenomeByInnovation(ins,
-            outs, {connectionProportion: connProp, connectionWeightRange: weightRange});
+            outs, {connectionProportion: connProp, connectionWeightRange: weightRange}, existing);
     };
 
     var verifyNodesAndConnections = function(ng, weightRange)
@@ -73,7 +73,7 @@ describe('Creating a new genome',function(){
         var bias = 0, ins = 0, outs = 0;
         ng.nodes.forEach(function(node){
             (typeof node.gid).should.equal('number');
-            (typeof node.activationFunction).should.equal('object');
+            (typeof node.activationFunction).should.equal('string');
             (typeof node.layer).should.equal('number');
             (typeof node.type).should.equal('string');
             if(node.type == cppnNode.NodeType.input)
@@ -134,16 +134,19 @@ describe('Creating a new genome',function(){
     });
 
 
-    it('nextInnovationID/currentInnovation/resetInnovation(): InnovationID should not equal previous innovation', function(done){
-        var lastID = neatGenome.Help.nextInnovationID();
+    it('nextInnovationID/currentInnovation/resetInnovation(): InnovationID should not equal previous innovation ', function(done){
+
+        var startIx = 0;
+
+        var lastID = neatGenome.Help.nextInnovationID();//startIx++);
         var currentID;
 
-        var testLength = 100;
+        var testLength = 1010;
         for(var i=0; i < testLength;i++)
         {
-            currentID = neatGenome.Help.nextInnovationID();
+            currentID = neatGenome.Help.nextInnovationID();//startIx++);
             currentID.should.not.equal(lastID);
-            currentID.should.equal(neatGenome.Help.currentInnovationID()-1);
+//            currentID.should.equal(startIx-1);//neatGenome.Help.currentInnovationID()-1);
             lastID = currentID;
         }
 
@@ -187,8 +190,8 @@ describe('Creating a new genome',function(){
 
 
     it('CreateGIDLookup(): CreateGIDLookup should create an object indexing a gid array', function(done){
-        var lastID = neatGenome.Help.nextInnovationID();
-        var currentID;
+//        var lastID = neatGenome.Help.nextInnovationID();
+//        var currentID;
 
         var previousNodes = {};
         var node;
@@ -233,7 +236,7 @@ describe('Creating a new genome',function(){
     //    need to test - neatGenome.NeatGenome()
     //    neatGenome.NeatGenome.Copy()
     it('NeatGenome(): NeatGenome should create valid neatgenome', function(done){
-        var lastID = neatGenome.Help.nextInnovationID();
+//        var lastID = neatGenome.Help.nextInnovationID();
         var currentID;
 
         var nodeCount= Math.floor(20*Math.random() + 3);
@@ -293,7 +296,8 @@ describe('Creating a new genome',function(){
         });
 
         //we should have created all nodes with new innovation IDs and all connections with IDs
-        neatGenome.Help.currentInnovationID().should.equal(ng.nodes.length + ng.connections.length);
+//        neatGenome.Help.currentInnovationID().should.equal(ng.nodes.length + ng.connections.length);
+        neatGenome.Help.nextInnovationID(ng.nodes.length + ng.connections.length).should.equal(ng.nodes.length + ng.connections.length);
         done();
 
     });
@@ -320,7 +324,8 @@ describe('Creating a new genome',function(){
         ng.connections.length.should.equal(0);
 
         //we should have created all nodes with new innovation IDs and all connections with IDs
-        neatGenome.Help.currentInnovationID().should.equal(ng.nodes.length + ng.connections.length);
+        neatGenome.Help.nextInnovationID(ng.nodes.length + ng.connections.length).should.equal(ng.nodes.length + ng.connections.length);
+//        neatGenome.Help.currentInnovationID().should.equal(ng.nodes.length + ng.connections.length);
 
         done();
     });
@@ -929,6 +934,10 @@ describe('Creating a new genome',function(){
 
             ng.mutate_DeleteConnection(hiddenConnections[0]);
 
+//            console.log('Delete: ');
+//            console.log(hiddenConnections[0]);
+//            console.log(' From: ');
+//            console.log(ng.connections);
             //none of our connections should equal what we removed!
             ng.connections.forEach(function(connection){
                 connection.gid.should.not.equal(hiddenConnections[0].gid);
@@ -1407,13 +1416,15 @@ describe('Creating a new genome',function(){
 
         var np = new neatParameters.NeatParameters();
         var ins = 3, outs = 2;
+        var existing = {};
+
 
         //fully connected simple network
-        var ng1 = createSimpleGenome(ins, outs, np.connectionWeightRange, 1);
+        var ng1 = createSimpleGenome(ins, outs, np.connectionWeightRange, 1,existing);
 
         neatGenome.Help.resetGenomeID();
         neatGenome.Help.resetInnovationID();
-        var ng2 = createSimpleGenome(ins, outs, np.connectionWeightRange, 1);
+        var ng2 = createSimpleGenome(ins, outs, np.connectionWeightRange, 1,existing);
 
         //equal conns and nodes, should be!
         ng1.connections.length.should.equal(ng2.connections.length);
@@ -1547,13 +1558,13 @@ describe('Creating a new genome',function(){
 
         var np = new neatParameters.NeatParameters();
         var ins = 3, outs = 2;
-
+        var existing = {};
         //fully connected simple network
-        var ng1 = createSimpleGenome(ins, outs, np.connectionWeightRange, 1);
+        var ng1 = createSimpleGenome(ins, outs, np.connectionWeightRange, 1, existing);
 
         neatGenome.Help.resetGenomeID();
         neatGenome.Help.resetInnovationID();
-        var ng2 = createSimpleGenome(ins, outs, np.connectionWeightRange, 1);
+        var ng2 = createSimpleGenome(ins, outs, np.connectionWeightRange, 1, existing);
 
         //equal conns and nodes, should be!
         ng1.connections.length.should.equal(ng2.connections.length);
@@ -1724,16 +1735,18 @@ describe('Creating a new genome',function(){
         neatGenome.Help.resetGenomeID();
         neatGenome.Help.resetInnovationID();
 
+        var existing = {};
+
         //lets create a genome
         var np = new neatParameters.NeatParameters();
         //3 ins, 2 outs, 100% connected
-        var ng1 = createSimpleGenome(3,2, np.connectionWeightRange, 1);
+        var ng1 = createSimpleGenome(3,2, np.connectionWeightRange, 1, existing);
 
         neatGenome.Help.resetGenomeID();
         neatGenome.Help.resetInnovationID();
 
         //3 ins, 2 outs, 100% connected
-        var ng2 = createSimpleGenome(3,2, np.connectionWeightRange, 1);
+        var ng2 = createSimpleGenome(3,2, np.connectionWeightRange, 1, existing);
 
 
         var ixToRemove1 = utilities.next(ng1.connections.length);
@@ -1898,16 +1911,16 @@ describe('Creating a new genome',function(){
     });
     it('createOffspringSexual(): should combine two genomes like a boss', function(done){
 
-
         var testCombinations = 100;
         for(var i=0 ; i < testCombinations; i++){
             neatGenome.Help.resetGenomeID();
             neatGenome.Help.resetInnovationID();
+            var existing = {};
 
             //lets create a genome
             var np = new neatParameters.NeatParameters();
             //3 ins, 2 outs, 100% connected
-            var ng1 = createSimpleGenome(3,2, np.connectionWeightRange, 1);
+            var ng1 = createSimpleGenome(3,2, np.connectionWeightRange, 1, existing);
 
             var originalLength = ng1.connections.length;
 
@@ -1915,7 +1928,7 @@ describe('Creating a new genome',function(){
             neatGenome.Help.resetInnovationID();
 
             //3 ins, 2 outs, 100% connected
-            var ng2 = createSimpleGenome(3,2, np.connectionWeightRange, 1);
+            var ng2 = createSimpleGenome(3,2, np.connectionWeightRange, 1, existing);
 
 
             var ixToRemove1 = utilities.next(ng1.connections.length);
@@ -1958,6 +1971,9 @@ describe('Creating a new genome',function(){
             //make sure that we don't accidentally cause that
             offspring12.connections.length.should.not.equal(ng1.connections.length);
             offspring21.connections.length.should.equal(originalLength);
+//
+//            if(!offspring12.performIntegrityCheck())
+//                console.log(offspring12.connections);
 
             offspring12.performIntegrityCheck().should.equal(true);
             offspring21.performIntegrityCheck().should.equal(true);
@@ -1990,13 +2006,14 @@ describe('Creating a new genome',function(){
             //We're going to create 2 genomes by hand, remove 2 connections from each, and measure their compatibility
             neatGenome.Help.resetGenomeID();
             neatGenome.Help.resetInnovationID();
+            var existing = {};
 
             //lets create a genome
             var np = new neatParameters.NeatParameters();
             np.connectionWeightRange = 2;
 
             //3 ins, 2 outs, 100% connected
-            var ng1 = createSimpleGenome(5,3, np.connectionWeightRange, 1);
+            var ng1 = createSimpleGenome(5,3, np.connectionWeightRange, 1, existing);
 
             var originalLength = ng1.connections.length;
 
@@ -2004,7 +2021,7 @@ describe('Creating a new genome',function(){
             neatGenome.Help.resetInnovationID();
 
             //3 ins, 2 outs, 100% connected
-            var ng2 = createSimpleGenome(3,2, np.connectionWeightRange, 1);
+            var ng2 = createSimpleGenome(3,2, np.connectionWeightRange, 1, existing);
 
 
             var ixToRemove11 = utilities.next(ng1.connections.length);
@@ -2060,13 +2077,14 @@ describe('Creating a new genome',function(){
             //We're going to create 2 genomes by hand, remove 2 connections from each, and measure their compatibility
             neatGenome.Help.resetGenomeID();
             neatGenome.Help.resetInnovationID();
+            var existing = {};
 
             //lets create a genome
             var np = new neatParameters.NeatParameters();
             np.connectionWeightRange = 2;
 
             //3 ins, 2 outs, 100% connected
-            var ng1 = createSimpleGenome(5,3, np.connectionWeightRange, 1);
+            var ng1 = createSimpleGenome(5,3, np.connectionWeightRange, 1, existing);
 
             var originalLength = ng1.connections.length;
 
@@ -2074,7 +2092,7 @@ describe('Creating a new genome',function(){
             neatGenome.Help.resetInnovationID();
 
             //3 ins, 2 outs, 100% connected
-            var ng2 = createSimpleGenome(3,2, np.connectionWeightRange, 1);
+            var ng2 = createSimpleGenome(3,2, np.connectionWeightRange, 1, existing);
 
 
             var ixToRemove11 = utilities.next(ng1.connections.length);
@@ -2135,13 +2153,13 @@ describe('Creating a new genome',function(){
             //We're going to create 2 genomes by hand, remove 2 connections from each, and measure their compatibility
             neatGenome.Help.resetGenomeID();
             neatGenome.Help.resetInnovationID();
-
+            var existing = {};
             //lets create a genome
             var np = new neatParameters.NeatParameters();
             np.connectionWeightRange = 2;
 
             //3 ins, 2 outs, 100% connected
-            var ng1 = createSimpleGenome(5,3, np.connectionWeightRange, 1);
+            var ng1 = createSimpleGenome(5,3, np.connectionWeightRange, 1, existing);
 
             var originalLength = ng1.connections.length;
 
@@ -2149,7 +2167,7 @@ describe('Creating a new genome',function(){
             neatGenome.Help.resetInnovationID();
 
             //3 ins, 2 outs, 100% connected
-            var ng2 = createSimpleGenome(3,2, np.connectionWeightRange, 1);
+            var ng2 = createSimpleGenome(3,2, np.connectionWeightRange, 1, existing);
 
 
             var ixToRemove11 = utilities.next(ng1.connections.length);

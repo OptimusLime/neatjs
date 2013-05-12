@@ -27,6 +27,19 @@ describe('Creating a new connection',function(){
     });
 
 
+    //test the other stringify reversing functions
+    before(function(done){
+
+        connection = new neatConnection.NeatConnection(gid.toString(), weight.toString(), {sourceID: sourceID.toString(), targetID: targetID.toString()});
+        done();
+    });
+
+    it('should have not stringified gid, weight, source, and target',function(){
+        (typeof connection.gid).should.not.equal('string');
+        (typeof connection.weight).should.not.equal('string');
+        (typeof connection.sourceID).should.not.equal('string');
+        (typeof connection.targetID).should.not.equal('string');
+    });
 
     //test the other vanilla connection type
     before(function(done){

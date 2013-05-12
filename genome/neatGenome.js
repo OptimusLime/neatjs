@@ -99,9 +99,24 @@
 
 
     var innovationCount = 0;
-    neatGenome.Help.nextInnovationID = function()
+    var lastID = -1;
+    var previousTick = -2;
+    var hitCount = 0;
+    //wouldn't work with multithreaded/multi-process environment
+    neatGenome.Help.nextInnovationID = function(ix)
     {
-        return innovationCount++;
+        if(ix !== undefined)
+            return ix;
+
+        var id = 1000*(new Date().valueOf());//innovationCount++;
+        if(lastID === id)
+            hitCount++;
+        else
+            hitCount = 0;
+
+
+        lastID = id;
+        return id + (hitCount%1000);
     };
 
     neatGenome.Help.currentInnovationID = function(){
@@ -153,17 +168,20 @@
     /// </summary>
     /// <returns></returns>
     //{connectionWeightRange: val, connectionProportion: val}
-    exports.Help.CreateGenomeByInnovation = function(ins, outs, connParams)
+    exports.Help.CreateGenomeByInnovation = function(ins, outs, connParams, existing)
     {
+        existing = existing || {};
         //create our ins and outs,
         var inputNodeList = [], outputNodeList = [], nodeList = [], connectionList = [];
 
         var aFunc = cppnActivationFactory.Factory.getActivationFunction('NullFn');
 
+        var iCount = 0;
+
         // IMPORTANT NOTE: The neurons must all be created prior to any connections. That way all of the genomes
         // will obtain the same innovation ID's for the bias,input and output nodes in the initial population.
         // Create a single bias neuron.
-        var node = new neatNode.NeatNode(neatGenome.Help.nextInnovationID(), aFunc, neatNode.INPUT_LAYER, {type: cppnNode.NodeType.bias});
+        var node = new neatNode.NeatNode(neatGenome.Help.nextInnovationID(iCount++), aFunc, neatNode.INPUT_LAYER, {type: cppnNode.NodeType.bias});
           //null, idGenerator.NextInnovationId, NeuronGene.INPUT_LAYER, NeuronType.Bias, actFunct, stepCount);
         inputNodeList.push(node);
         nodeList.push(node);
@@ -174,7 +192,7 @@
         for(var i=0; i<ins; i++)
         {
             //TODO: DAVID proper activation function change to NULL?
-            node = new neatNode.NeatNode(neatGenome.Help.nextInnovationID(), aFunc, neatNode.INPUT_LAYER, {type: cppnNode.NodeType.input});
+            node = new neatNode.NeatNode(neatGenome.Help.nextInnovationID(iCount++), aFunc, neatNode.INPUT_LAYER, {type: cppnNode.NodeType.input});
             inputNodeList.push(node);
             nodeList.push(node);
         }
@@ -184,7 +202,7 @@
         for(var i=0; i<outs; i++)
         {
             //TODO: DAVID proper activation function change to NULL?
-            node = new neatNode.NeatNode(neatGenome.Help.nextInnovationID(), aFunc, neatNode.OUTPUT_LAYER, {type: cppnNode.NodeType.output});
+            node = new neatNode.NeatNode(neatGenome.Help.nextInnovationID(iCount++), aFunc, neatNode.OUTPUT_LAYER, {type: cppnNode.NodeType.output});
             outputNodeList.push(node);
             nodeList.push(node);
         }
@@ -197,9 +215,17 @@
             // Always generate an ID even if we aren't going to use it. This is necessary to ensure connections
                 // between the same neurons always have the same ID throughout the generated population.
 
-                if(utilities.nextDouble() < connParams.connectionProportion)
-                {	// Ok lets create a connection.
-                    var connectionInnovationId = neatGenome.Help.nextInnovationID();
+                if(utilities.nextDouble() < connParams.connectionProportion )
+                {
+
+                    var cIdentifier = sourceNode.gid + "," + targetNode.gid;
+
+                    // Ok lets create a connection.
+                    //if it already exists, we can use the existing innovation ID
+                    var connectionInnovationId = existing[cIdentifier] || neatGenome.Help.nextInnovationID();
+
+                    //if we didn't have one before, we do now! If we did, we simply overwrite with the same innovation id
+                    existing[cIdentifier] = connectionInnovationId;
 
                     connectionList.push(new neatConnection.NeatConnection(connectionInnovationId,
                         (utilities.nextDouble() * connParams.connectionWeightRange ) - connParams.connectionWeightRange/2.0,
@@ -958,7 +984,7 @@
             actFunct= cppnActivationFactory.Factory.getRandomActivationFunction();
             //newNeuronGene = new NeuronGene(ea.NextInnovationId, NeuronType.Hidden, actFunct);
 
-            var nextID = neatGenome.Help.nextInnovationID();
+            var nextID = neatGenome.Help.nextInnovationID();//connectionToReplace.gid);
 
             newNode = new neatNode.NeatNode(nextID, actFunct,
                 (nodeLookup[connectionToReplace.sourceID].layer + nodeLookup[connectionToReplace.targetID].layer)/2.0,
