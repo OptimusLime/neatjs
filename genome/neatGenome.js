@@ -17,7 +17,6 @@
     var neatGenome = exports;
     var cppnNode = isBrowser ? selfBrowser['cppnNode'] : require('../cppnjs/components/cppnNode.js');
     var neatParameters =  isBrowser ? selfBrowser['neatParameters'] : require('../neatHelp/neatParameters.js');
-    var neatDecoder =  isBrowser ? selfBrowser['neatDecoder'] : require('../neatHelp/neatDecoder.js');
     var cppnActivationFactory =  isBrowser ? selfBrowser['cppnActivationFactory'] : require('../cppnjs/activationFunctions/cppnActivationFactory.js');
 
 //var ngNSS = "Neat.Genome";
@@ -678,6 +677,8 @@
     exports.NeatGenome.prototype.networkDecode = function(activationFn)
     {
         var self = this;
+
+        var neatDecoder =  isBrowser ? selfBrowser['neatDecoder'] : require('../neatHelp/neatDecoder.js');
         return neatDecoder.DecodeToFloatFastConcurrentNetwork(self, activationFn);
     };
 

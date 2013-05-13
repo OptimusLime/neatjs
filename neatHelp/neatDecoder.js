@@ -6,7 +6,7 @@
 
     var neatDecoder = exports;
     var cppnNode = isBrowser ? selfBrowser['cppnNode'] : require('../cppnjs/components/cppnNode.js');
-    var cppnActivationFactory = isBrowser ? selfBrowser['cppnNode'] : require('../cppnjs/activationFunctions/cppnActivationFactory.js');
+    var cppnActivationFactory = isBrowser ? selfBrowser['cppnActivationFactory'] : require('../cppnjs/activationFunctions/cppnActivationFactory.js');
     var cppns = isBrowser ? selfBrowser['cppn'] : require('../cppnjs/cppns/cppn.js');
     var cppnConnection = isBrowser ? selfBrowser['cppnConnection'] : require('../cppnjs/components/cppnConnection.js');
     var neatGenome = isBrowser ? selfBrowser['neatGenome'] : require('../genome/neatGenome.js');
