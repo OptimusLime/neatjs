@@ -234,7 +234,7 @@
                 if(utilities.nextDouble() < connParams.connectionProportion )
                 {
 
-                    var cIdentifier = sourceNode.gid + "," + targetNode.gid;
+                    var cIdentifier = '(' + sourceNode.gid + "," + targetNode.gid + ')';
 
                     // Ok lets create a connection.
                     //if it already exists, we can use the existing innovation ID
