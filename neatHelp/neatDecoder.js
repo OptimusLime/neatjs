@@ -11,6 +11,17 @@
     var cppnConnection = isBrowser ? selfBrowser['cppnConnection'] : require('../cppnjs/components/cppnConnection.js');
     var neatGenome = isBrowser ? selfBrowser['neatGenome'] : require('../genome/neatGenome.js');
 
+    neatDecoder.CheckDependencies = function()
+    {
+        if(!isBrowser)
+            return;
+
+        cppnNode = selfBrowser['cppnNode'];
+        cppnActivationFactory =  selfBrowser['cppnActivationFactory'];
+        cppns =  selfBrowser['cppn'];
+        cppnConnection =  selfBrowser['cppnConnection'];
+        neatGenome =  selfBrowser['neatGenome'];
+    };
 
     neatDecoder.DecodeToFloatFastConcurrentNetwork = function(ng, activationFunction)
     {

@@ -21,6 +21,22 @@
 
 //var ngNSS = "Neat.Genome";
 //var ngNS = namespace(ngNSS);
+    exports.CheckDependencies = function()
+    {
+        if(!isBrowser)
+            return;
+
+        neatConnection = isBrowser ? selfBrowser['neatConnection'] : require('./neatConnection.js');
+        neatNode = isBrowser ? selfBrowser['neatNode'] : require('./neatNode.js');
+        //if we need a node object, this is how we would do it
+        utilities = isBrowser ? selfBrowser['utilities'] : require('../cppnjs/utility/utilities.js');
+        neatHelp = isBrowser ? selfBrowser['neatHelp'] : require('../neatHelp/neatHelp.js');
+        neatGenome = exports;
+        cppnNode = isBrowser ? selfBrowser['cppnNode'] : require('../cppnjs/components/cppnNode.js');
+        neatParameters =  isBrowser ? selfBrowser['neatParameters'] : require('../neatHelp/neatParameters.js');
+        cppnActivationFactory =  isBrowser ? selfBrowser['cppnActivationFactory'] : require('../cppnjs/activationFunctions/cppnActivationFactory.js');
+    };
+
 
     exports.NeatGenome = function(localID, nodes, connections, incount, outcount, debug) {
 
@@ -169,6 +185,7 @@
     //{connectionWeightRange: val, connectionProportion: val}
     exports.Help.CreateGenomeByInnovation = function(ins, outs, connParams, existing)
     {
+        //existing is for seing if a connection innovation id already exists according to local believers/shamans
         existing = existing || {};
         //create our ins and outs,
         var inputNodeList = [], outputNodeList = [], nodeList = [], connectionList = [];
