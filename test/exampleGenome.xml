@@ -1,0 +1,62 @@
+<genome id="5" species-id="0" age="1" fitness="1.00">
+  <neurons>
+    <neuron id="0" type="bias" activationFunction="NullFn" layer="0"/>
+    <neuron id="1" type="in" activationFunction="NullFn" layer="0"/>
+    <neuron id="2" type="in" activationFunction="NullFn" layer="0"/>
+    <neuron id="3" type="in" activationFunction="NullFn" layer="0"/>
+	<!-- Max(x1DistanceFromCenter, x2DistanceFromCenter) -->
+	
+	<!-- Hue -->
+    <neuron id="4" type="out" activationFunction="Sine" layer="10"/>
+	<!-- Saturation -->
+    <neuron id="5" type="out" activationFunction="PlainSigmoid" layer="10"/>
+	<!-- Value -->
+	<neuron id="6" type="out" activationFunction="BipolarSigmoid" layer="10"/>
+	
+  </neurons>
+  <connections>
+  <!-- Set the generic connections from inputs to output neurons, except for the LEO node -->
+    <connection innov-id="9" src-id="0" tgt-id="6" weight="1" />
+	<connection innov-id="10" src-id="0" tgt-id="8" weight="1" />
+	<connection innov-id="11" src-id="0" tgt-id="9" weight="1" />
+	
+	
+	 <connection innov-id="12" src-id="1" tgt-id="6" weight="1" />
+	<connection innov-id="13" src-id="1" tgt-id="8" weight="1" />
+	<connection innov-id="14" src-id="1" tgt-id="9" weight="1" />
+	
+	 <connection innov-id="15" src-id="2" tgt-id="6" weight="1" />
+	
+	 <connection innov-id="18" src-id="3" tgt-id="6" weight="1" />
+	
+	 <connection innov-id="21" src-id="4" tgt-id="6" weight="1" />
+	
+	<connection innov-id="31" src-id="1" tgt-id="100" weight="0" />
+	<connection innov-id="32" src-id="2" tgt-id="100" weight="0" />
+	<connection innov-id="33" src-id="3" tgt-id="100" weight="0" />
+	<connection innov-id="34" src-id="4" tgt-id="100" weight="0" />
+	
+	<connection innov-id="35" src-id="1" tgt-id="101" weight="1" />
+    <connection innov-id="36" src-id="3" tgt-id="101" weight="-1" />
+	 <!-- Patch the gaussian to the StepFunction output (leo) -->
+	<connection innov-id="38" src-id="101" tgt-id="110" weight="1" />
+	
+	 <connection innov-id="40" src-id="2" tgt-id="102" weight="1" />
+    <connection innov-id="42" src-id="4" tgt-id="102" weight="-1" />
+	 <!-- Patch the gaussian to the StepFunction output (leo) -->
+	<connection innov-id="48" src-id="102" tgt-id="110" weight="1" />
+	
+	<connection innov-id="49" src-id="0" tgt-id="110" weight="-1.7" />
+	
+		
+	<connection innov-id="50" src-id="100" tgt-id="7" weight="-1" />
+	<connection innov-id="51" src-id="110" tgt-id="7" weight="1" />
+	
+	 <!-- Finally, wire the bias to counteract the gaussians -->
+	  <!-- Normally, we'd balance it with equal weights, but our Guassians go from [-1,1]
+	  Therefore, when the x,y coordiantes are close, our gaussians are strongly positive, when far
+	  extremely negative - I chose in the upper part of the range (.85 each x 3) => 2.55 total => -2.55 weight 
+	  -->
+  
+  </connections>
+</genome>

@@ -31,7 +31,6 @@
         //if we need a node object, this is how we would do it
         utilities = isBrowser ? selfBrowser['utilities'] : require('../cppnjs/utility/utilities.js');
         neatHelp = isBrowser ? selfBrowser['neatHelp'] : require('../neatHelp/neatHelp.js');
-        neatGenome = exports;
         cppnNode = isBrowser ? selfBrowser['cppnNode'] : require('../cppnjs/components/cppnNode.js');
         neatParameters =  isBrowser ? selfBrowser['neatParameters'] : require('../neatHelp/neatParameters.js');
         cppnActivationFactory =  isBrowser ? selfBrowser['cppnActivationFactory'] : require('../cppnjs/activationFunctions/cppnActivationFactory.js');
@@ -260,7 +259,19 @@
 
     exports.NeatGenome.Copy = function(genome, gid)
     {
-      var gCopy = new exports.NeatGenome((gid !== undefined ? gid : genome.gid), genome.nodes, genome.connections, genome.inputNodeCount, genome.outputNodeCount);
+
+        var nodeCopy = [], connectionCopy = [];
+        genome.nodes.forEach(function(node)
+        {
+           nodeCopy.push(neatNode.NeatNode.Copy(node));
+        });
+        genome.connections.forEach(function(conn)
+        {
+            connectionCopy.push(neatConnection.NeatConnection.Copy(conn));
+        });
+
+        //not debuggin
+        var gCopy = new exports.NeatGenome((gid !== undefined ? gid : genome.gid), nodeCopy, connectionCopy, genome.inputNodeCount, genome.outputNodeCount, false);
         console.log('Yet to implement genome behavior copying');
     //    if(genome.Behavior)
     //        gCopy.Behavior
