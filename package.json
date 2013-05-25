@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "mocha": "1.1.x",
-    "should": "1.1.x"
+    "should": "1.1.x",
+  "xml2js" : "0.2.x"
   }
 }

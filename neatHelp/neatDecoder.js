@@ -5,22 +5,27 @@
     var activationFunctionArray = [];
 
     var neatDecoder = exports;
-    var cppnNode = isBrowser ? selfBrowser['cppnNode'] : require('../cppnjs/components/cppnNode.js');
-    var cppnActivationFactory = isBrowser ? selfBrowser['cppnActivationFactory'] : require('../cppnjs/activationFunctions/cppnActivationFactory.js');
-    var cppns = isBrowser ? selfBrowser['cppn'] : require('../cppnjs/cppns/cppn.js');
-    var cppnConnection = isBrowser ? selfBrowser['cppnConnection'] : require('../cppnjs/components/cppnConnection.js');
-    var neatGenome = isBrowser ? selfBrowser['neatGenome'] : require('../genome/neatGenome.js');
+
+    //we have to load any dependencies first!
+    var cppnjs = isBrowser ? selfBrowser['common'] : require('../cppnjs/cppnjs.js');
+    var neatjs = isBrowser ? selfBrowser['common'] : require('../neatjs.js');
+
+    var cppnNode = cppnjs.loadLibraryFile('cppnjs', 'cppnNode');
+    var cppnActivationFactory = cppnjs.loadLibraryFile('cppnjs', 'cppnActivationFactory');
+    var cppns = cppnjs.loadLibraryFile('cppnjs', 'cppn');
+    var cppnConnection = cppnjs.loadLibraryFile('cppnjs', 'cppnConnection');
+    var neatGenome = neatjs.loadLibraryFile('neatjs', 'neatGenome');
 
     neatDecoder.CheckDependencies = function()
     {
-        if(!isBrowser)
-            return;
+        //grab cppn objects
+        cppnNode = cppnjs.loadLibraryFile('cppnjs', 'cppnNode');
+        cppnActivationFactory = cppnjs.loadLibraryFile('cppnjs', 'cppnActivationFactory');
+        cppns = cppnjs.loadLibraryFile('cppnjs', 'cppn');
+        cppnConnection = cppnjs.loadLibraryFile('cppnjs', 'cppnConnection');
 
-        cppnNode = selfBrowser['cppnNode'];
-        cppnActivationFactory =  selfBrowser['cppnActivationFactory'];
-        cppns =  selfBrowser['cppn'];
-        cppnConnection =  selfBrowser['cppnConnection'];
-        neatGenome =  selfBrowser['neatGenome'];
+        //load from neat
+        neatGenome = neatjs.loadLibraryFile('neatjs', 'neatGenome');
     };
 
     neatDecoder.DecodeToFloatFastConcurrentNetwork = function(ng, activationFunction)
@@ -109,4 +114,4 @@
 
 
     //send in the object, and also whetehr or not this is nodejs
-})(typeof exports === 'undefined'? this['neatDecoder']={}: exports, this, typeof exports === 'undefined'? true : false);
+})(typeof exports === 'undefined'? this['neatjs']['neatDecoder']={}: exports, this, typeof exports === 'undefined'? true : false);

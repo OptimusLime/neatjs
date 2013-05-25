@@ -1,39 +1,38 @@
-//stuff
-
-//var namespc = namespace;
-//if(namespc === 'undefined')
-//{
-//    namespc = require('../../html/js/Helpers.js');
-//}
-//
 (function(exports, selfBrowser, isBrowser){
 
-    //we've defined our top level holder of things, in nodejs or browser
-    var neatConnection = isBrowser ? selfBrowser['neatConnection'] : require('./neatConnection.js');
-    var neatNode = isBrowser ? selfBrowser['neatNode'] : require('./neatNode.js');
-    //if we need a node object, this is how we would do it
-    var utilities = isBrowser ? selfBrowser['utilities'] : require('../cppnjs/utility/utilities.js');
-    var neatHelp = isBrowser ? selfBrowser['neatHelp'] : require('../neatHelp/neatHelp.js');
     var neatGenome = exports;
-    var cppnNode = isBrowser ? selfBrowser['cppnNode'] : require('../cppnjs/components/cppnNode.js');
-    var neatParameters =  isBrowser ? selfBrowser['neatParameters'] : require('../neatHelp/neatParameters.js');
-    var cppnActivationFactory =  isBrowser ? selfBrowser['cppnActivationFactory'] : require('../cppnjs/activationFunctions/cppnActivationFactory.js');
+    //we've defined our top level holder of things, in nodejs or browser
+
+    //load dependencies first!
+    var cppnjs = isBrowser ? selfBrowser['common'] : require('../cppnjs/cppnjs.js');
+    var neatjs = isBrowser ? selfBrowser['common'] : require('../neatjs.js');
+
+    //load cppnjs objects
+    var cppnNode = cppnjs.loadLibraryFile('cppnjs', 'cppnNode');
+    var cppnActivationFactory =  cppnjs.loadLibraryFile('cppnjs', 'cppnActivationFactory');
+    var utilities = cppnjs.loadLibraryFile('cppnjs', 'utilities');
+
+    //load neatjs objects, order doesn't matter, just organized this way
+    var neatConnection = neatjs.loadLibraryFile('neatjs', 'neatConnection');
+    var neatNode = neatjs.loadLibraryFile('neatjs', 'neatNode');
+    var neatHelp =  neatjs.loadLibraryFile('neatjs', 'neatHelp');
+    var neatParameters =  neatjs.loadLibraryFile('neatjs', 'neatParameters');
+
 
 //var ngNSS = "Neat.Genome";
 //var ngNS = namespace(ngNSS);
     exports.CheckDependencies = function()
     {
-        if(!isBrowser)
-            return;
+        //load cppnjs objects
+        cppnNode = cppnjs.loadLibraryFile('cppnjs', 'cppnNode');
+        cppnActivationFactory =  cppnjs.loadLibraryFile('cppnjs', 'cppnActivationFactory');
+        utilities = cppnjs.loadLibraryFile('neatjs', 'utilities');
 
-        neatConnection = isBrowser ? selfBrowser['neatConnection'] : require('./neatConnection.js');
-        neatNode = isBrowser ? selfBrowser['neatNode'] : require('./neatNode.js');
-        //if we need a node object, this is how we would do it
-        utilities = isBrowser ? selfBrowser['utilities'] : require('../cppnjs/utility/utilities.js');
-        neatHelp = isBrowser ? selfBrowser['neatHelp'] : require('../neatHelp/neatHelp.js');
-        cppnNode = isBrowser ? selfBrowser['cppnNode'] : require('../cppnjs/components/cppnNode.js');
-        neatParameters =  isBrowser ? selfBrowser['neatParameters'] : require('../neatHelp/neatParameters.js');
-        cppnActivationFactory =  isBrowser ? selfBrowser['cppnActivationFactory'] : require('../cppnjs/activationFunctions/cppnActivationFactory.js');
+        //laod our neatjs objects now
+        neatConnection = neatjs.loadLibraryFile('neatjs', 'neatConnection');
+        neatNode = neatjs.loadLibraryFile('neatjs', 'neatNode');
+        neatHelp =  neatjs.loadLibraryFile('neatjs', 'neatHelp');
+        neatParameters =  neatjs.loadLibraryFile('neatjs', 'neatParameters');
     };
 
 
@@ -1567,7 +1566,7 @@
     //gotta test everything against the C# class
 
     //send in the object, and also whetehr or not this is nodejs
-})(typeof exports === 'undefined'? this['neatGenome']={}: exports, this, typeof exports === 'undefined'? true : false);
+})(typeof exports === 'undefined'? this['neatjs']['neatGenome']={}: exports, this, typeof exports === 'undefined'? true : false);
 
 //C# code that was not included
 

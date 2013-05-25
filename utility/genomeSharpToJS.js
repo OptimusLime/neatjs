@@ -4,18 +4,25 @@
 //    var cantorPair = isBrowser ? selfBrowser['cantorPair'] : require('../utility/cantorPair.js');
     var genomeSharpToJS = exports;
 
-    var neatConnection = isBrowser ? selfBrowser['neatConnection'] : require('../genome/neatConnection.js');
+    //load dependencies first
+    var cppnjs = isBrowser ? selfBrowser['common'] : require('../cppnjs/cppnjs.js');
+    var neatjs = isBrowser ? selfBrowser['common'] : require('../neatjs.js');
 
-    var cppnNode = isBrowser ? selfBrowser['cppnNode'] : require('../cppnjs/components/cppnNode.js');
-    var neatNode = isBrowser ? selfBrowser['neatNode'] : require('../genome/neatNode.js');
-    var neatGenome = isBrowser ? selfBrowser['neatGenome'] : require('../genome/neatGenome.js');
+    var cppnNode = cppnjs.loadLibraryFile('cppnjs', 'cppnNode');
+
+    var neatNode = neatjs.loadLibraryFile('neatjs', 'neatNode');
+    var neatConnection = neatjs.loadLibraryFile('neatjs', 'neatConnection');
+    var neatGenome = neatjs.loadLibraryFile('neatjs', 'neatGenome');
 
     genomeSharpToJS.CheckDependencies = function()
     {
-        neatConnection = isBrowser ? selfBrowser['neatConnection'] : require('../genome/neatConnection.js');
-        cppnNode = isBrowser ? selfBrowser['cppnNode'] : require('../cppnjs/components/cppnNode.js');
-        neatNode = isBrowser ? selfBrowser['neatNode'] : require('../genome/neatNode.js');
-        neatGenome = isBrowser ? selfBrowser['neatGenome'] : require('../genome/neatGenome.js');
+        //load from cppn library
+        cppnNode = cppnjs.loadLibraryFile('cppnjs', 'cppnNode');
+
+        //load from neatjs library
+        neatNode = neatjs.loadLibraryFile('neatjs', 'neatNode');
+        neatConnection = neatjs.loadLibraryFile('neatjs', 'neatConnection');
+        neatGenome = neatjs.loadLibraryFile('neatjs', 'neatGenome');
     };
 
     genomeSharpToJS.NeuronTypeToNodeType = function(type)
@@ -74,4 +81,4 @@
     };
 
     //send in the object, and also whetehr or not this is nodejs
-})(typeof exports === 'undefined'? this['genomeSharpToJS']={}: exports, this, typeof exports === 'undefined'? true : false);
+})(typeof exports === 'undefined'? this['neatjs']['genomeSharpToJS']={}: exports, this, typeof exports === 'undefined'? true : false);
