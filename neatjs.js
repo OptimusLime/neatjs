@@ -210,6 +210,6 @@
     }
 
     //send in the object, and also whetehr or not this is nodejs
-})(typeof exports === 'undefined'? this['cppnjs']={}: exports, this, typeof exports === 'undefined'? true : false);
+})(typeof exports === 'undefined'? this['neatjs']={}: exports, this, typeof exports === 'undefined'? true : false);
 
 
