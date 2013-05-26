@@ -26,7 +26,7 @@
         //load cppnjs objects
         cppnNode = cppnjs.loadLibraryFile('cppnjs', 'cppnNode');
         cppnActivationFactory =  cppnjs.loadLibraryFile('cppnjs', 'cppnActivationFactory');
-        utilities = cppnjs.loadLibraryFile('neatjs', 'utilities');
+        utilities = cppnjs.loadLibraryFile('cppnjs', 'utilities');
 
         //laod our neatjs objects now
         neatConnection = neatjs.loadLibraryFile('neatjs', 'neatConnection');
@@ -704,8 +704,8 @@
     exports.NeatGenome.prototype.networkDecode = function(activationFn)
     {
         var self = this;
+        var neatDecoder =  neatjs.loadLibraryFile('neatjs', 'neatDecoder');
 
-        var neatDecoder =  isBrowser ? selfBrowser['neatDecoder'] : require('../neatHelp/neatDecoder.js');
         return neatDecoder.DecodeToFloatFastConcurrentNetwork(self, activationFn);
     };
 
