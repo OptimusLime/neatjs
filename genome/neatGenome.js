@@ -1135,6 +1135,10 @@
                 var sourceID = sourceNeuron.gid;
                 var targetID = targetNeuron.gid;
 
+                //we don't allow recurrent connections, we can't let the target layers be <= src
+                if(np.disallowRecurrence && targetNeuron.layer <= sourceNeuron.layer)
+                    continue;
+
                 if(!self.testForExistingConnectionInnovation(sourceID, targetID))
                 {
                     // Check if a matching mutation has already occured on another genome.
