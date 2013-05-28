@@ -174,13 +174,13 @@
         self.connectionMutationParameterGroupList.push(new neatParameters.ConnectionMutationParameterGroup(0.125, neatParameters.ConnectionPerturbationType.jiggleEven,
             neatParameters.ConnectionSelectionType.proportional, 0.5, 0, 0.05, 0.0));
 
-        self.connectionMutationParameterGroupList.push(new neatParameters.ConnectionMutationParameterGroup(0.125, neatParameters.ConnectionPerturbationType.jiggleEven,
+        self.connectionMutationParameterGroupList.push(new neatParameters.ConnectionMutationParameterGroup(0.5, neatParameters.ConnectionPerturbationType.jiggleEven,
             neatParameters.ConnectionSelectionType.proportional, 0.1, 0, 0.05, 0.0));
 
         self.connectionMutationParameterGroupList.push(new neatParameters.ConnectionMutationParameterGroup(0.125, neatParameters.ConnectionPerturbationType.jiggleEven,
             neatParameters.ConnectionSelectionType.fixedQuantity, 0.0, 1, 0.05, 0.0));
 
-        self.connectionMutationParameterGroupList.push(new neatParameters.ConnectionMutationParameterGroup(0.5, neatParameters.ConnectionPerturbationType.reset,
+        self.connectionMutationParameterGroupList.push(new neatParameters.ConnectionMutationParameterGroup(0.125, neatParameters.ConnectionPerturbationType.reset,
             neatParameters.ConnectionSelectionType.proportional, 0.1, 0, 0.0, 0.0));
 
         self.connectionMutationParameterGroupList.push(new neatParameters.ConnectionMutationParameterGroup(0.125, neatParameters.ConnectionPerturbationType.reset,

@@ -315,7 +315,7 @@
             connectionTable[conKey] = connectionList.length;
 
             // Add the gene to the list.
-            connectionList.push(connection);
+            connectionList.push(new neatConnection.NeatConnection.Copy(connection));
         }
         else if(overwriteExisting)
         {
