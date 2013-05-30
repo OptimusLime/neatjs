@@ -270,7 +270,7 @@
         });
 
         //not debuggin
-        var gCopy = new exports.NeatGenome((gid !== undefined ? gid : genome.gid), nodeCopy, connectionCopy, genome.inputNodeCount, genome.outputNodeCount, false);
+        var gCopy = new exports.NeatGenome((gid !== undefined ? gid : genome.localID), nodeCopy, connectionCopy, genome.inputNodeCount, genome.outputNodeCount, false);
         console.log('Yet to implement genome behavior copying');
     //    if(genome.Behavior)
     //        gCopy.Behavior
