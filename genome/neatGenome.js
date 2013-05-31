@@ -15,6 +15,7 @@
     //load neatjs objects, order doesn't matter, just organized this way
     var neatConnection = neatjs.loadLibraryFile('neatjs', 'neatConnection');
     var neatNode = neatjs.loadLibraryFile('neatjs', 'neatNode');
+    var neatMutation = neatjs.loadLibraryFile('neatjs', 'neatMutation');
     var neatHelp =  neatjs.loadLibraryFile('neatjs', 'neatHelp');
     var neatParameters =  neatjs.loadLibraryFile('neatjs', 'neatParameters');
 
@@ -31,6 +32,7 @@
         //laod our neatjs objects now
         neatConnection = neatjs.loadLibraryFile('neatjs', 'neatConnection');
         neatNode = neatjs.loadLibraryFile('neatjs', 'neatNode');
+        var neatMutation = neatjs.loadLibraryFile('neatjs', 'neatMutation');
         neatHelp =  neatjs.loadLibraryFile('neatjs', 'neatHelp');
         neatParameters =  neatjs.loadLibraryFile('neatjs', 'neatParameters');
     };
@@ -46,6 +48,9 @@
     // From C#: Ensure that the connectionGenes are sorted by innovation ID at all times.
         self.nodes = nodes;
         self.connections = connections;
+
+        //we start a fresh set of mutations for each genome we create!
+        self.mutations = [];
 
         self.debug = debug;
 
@@ -1050,6 +1055,21 @@
         neatGenome.Help.insertByInnovation(newConnection1, self.connections);
         neatGenome.Help.insertByInnovation(newConnection2, self.connections);
 
+        //create our mutation object
+        var targets  = {sourceID: connectionToReplace.gid};
+        var results = {nodes: [newNode.gid], connections: [newConnection1.gid, newConnection2.gid]};
+
+        //we have our targets, and the results, make our object
+        var newMutation = new neatMutation.NeatMutation(
+            neatGenome.Help.nextInnovationID(),
+            "AddNode",
+            targets,
+            results
+            );
+
+        //add mutation to the genome
+        self.mutations.push(newMutation);
+
         //in javascript, we return the new node and connections created, since it's so easy!
 //        return {node: newNode, connection1: newConnection1, newConnection2: newConnection2};
 
@@ -1177,6 +1197,22 @@
                         neatGenome.Help.insertByInnovation(newConnection, self.connections);
 //                        connectionGeneList.InsertIntoPosition(newConnection);
                     }
+
+
+                    //create our mutation object
+                    var targets  = {sourceID: newConnection.sourceID, targetID: newConnection.targetID};
+                    var results = {connections: [newConnection.gid]};
+
+                    //we have our targets, and the results, make our object
+                    var newMutation = new neatMutation.NeatMutation(
+                        neatGenome.Help.nextInnovationID(),
+                        "AddConnection",
+                        targets,
+                        results
+                    );
+
+                    //add mutation to the genome
+                    self.mutations.push(newMutation);
 
                     return true;
                 }
