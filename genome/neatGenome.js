@@ -38,11 +38,11 @@
     };
 
 
-    exports.NeatGenome = function(localID, nodes, connections, incount, outcount, debug) {
+    exports.NeatGenome = function(gid, nodes, connections, incount, outcount, debug) {
 
         var self = this;
 
-        self.localID = localID;
+        self.gid = gid;
         self.fitness = 0;
 
     // From C#: Ensure that the connectionGenes are sorted by innovation ID at all times.
@@ -275,7 +275,7 @@
         });
 
         //not debuggin
-        var gCopy = new exports.NeatGenome((gid !== undefined ? gid : genome.localID), nodeCopy, connectionCopy, genome.inputNodeCount, genome.outputNodeCount, false);
+        var gCopy = new exports.NeatGenome((gid !== undefined ? gid : genome.gid), nodeCopy, connectionCopy, genome.inputNodeCount, genome.outputNodeCount, false);
         console.log('Yet to implement genome behavior copying');
     //    if(genome.Behavior)
     //        gCopy.Behavior
