@@ -28,7 +28,9 @@
         'neatConnection'  :  '/genome/neatConnection.js',
         'neatGenome'  :  '/genome/neatGenome.js',
 
-        'genomeSharpToJS' :  "/utility/genomeSharpToJS.js"
+        'genomeSharpToJS' :  "/utility/genomeSharpToJS.js",
+
+        'iec' :  "/evolution/iec.js"
     };
 
     //we export our scripts!
