@@ -5,6 +5,7 @@
     var neatConnection = exports;
 
 
+    //TODO: Add step counter
     neatConnection.NeatConnection = function(gid, weight, srcTgtObj) {
 
         var self = this;

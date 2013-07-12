@@ -20,6 +20,9 @@
 
         self.layer = (typeof layer === 'string' ? parseFloat(layer) : layer);
 
+        //TODO: Create step tests, include in constructor
+        self.step = 0;
+
         self.bias = 0;
     };
 

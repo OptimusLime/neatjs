@@ -244,11 +244,11 @@ describe('Creating a new genome',function(){
         var nodesAndConns = createNodesAndConnections(nodeCount,connectionCount);
 //        console.log('testing genome with: ' + nodesAndConns.nodes.length + ' nodes and ' + nodesAndConns.connections.length + ' connections');
 
-        var localID = neatGenome.Help.nextGenomeID();
+        var gid = neatGenome.Help.nextGenomeID();
         var ins = 2, outs = 2;
-        var genome = new neatGenome.NeatGenome(localID, nodesAndConns.nodes, nodesAndConns.connections, ins, outs);
+        var genome = new neatGenome.NeatGenome(gid, nodesAndConns.nodes, nodesAndConns.connections, ins, outs);
 
-        genome.localID.should.equal(localID);
+        genome.gid.should.equal(gid);
         genome.nodes.length.should.equal(nodeCount);
         genome.connections.length.should.equal(connectionCount);
 
@@ -1319,7 +1319,7 @@ describe('Creating a new genome',function(){
         var cloneChange = ng.createOffspringAsexual({},{},np);
 
         //Please don't duplicate genome ids!
-        cloneChange.localID.should.not.equal(ng.localID);
+        cloneChange.gid.should.not.equal(ng.gid);
 
         verifyNodesAndConnections(ng, np.connectionWeightRange);
 
@@ -2234,11 +2234,11 @@ describe('Creating a new genome',function(){
 //        var nodesAndConns = createNodesAndConnections(Math.floor(20*Math.random() + 3),Math.floor(20*Math.random() + 3));
 //        console.log('testing genome with: ' + nodesAndConns.nodes.length + ' nodes and ' + nodesAndConns.connections.length + ' connections');
 //
-//        var localID = neatGenome.Help.nextGenomeID();
+//        var gid = neatGenome.Help.nextGenomeID();
 //        var ins = 2, outs = 2;
-//        var genome = new neatGenome.NeatGenome(localID, nodesAndConns.nodes, nodesAndConns.connections, ins, outs);
+//        var genome = new neatGenome.NeatGenome(gid, nodesAndConns.nodes, nodesAndConns.connections, ins, outs);
 //
-//        genome.localID.should.equal(localID);
+//        genome.gid.should.equal(gid);
 //        genome.nodes.length.should.equal(nodesAndConns.nodes.length);
 //        genome.connections.length.should.equal(nodesAndConns.connections.length);
 //
