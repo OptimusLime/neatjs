@@ -1,15 +1,20 @@
 var assert = require('assert');
 var should = require('should');
 
+
+var common = require('../cppnjs/cppnjs.js');
+var cppnActivationFunctions =  common.loadLibraryFile('cppnjs', 'cppnActivationFunctions');
+var cppnActivationFactory =  common.loadLibraryFile('cppnjs', 'cppnActivationFactory');
+
 var neatNode = require('../genome/neatNode.js');
-var neatActivationFactory = require('../cppnjs/activationFunctions/cppnActivationFactory.js');
+//var neatActivationFactory = require('../cppnjs/activationFunctions/cppnActivationFactory.js');
 var cppnNode = require('../cppnjs/components/cppnNode.js');
 
 var testActivation = function(functionString, value, functionValue)
 {
     var aFunc;
     before(function(done){
-        aFunc = neatActivationFactory.Factory.getActivationFunction(functionString);
+        aFunc = cppnActivationFactory.Factory.getActivationFunction(functionString);
         done();
     });
 
@@ -38,28 +43,39 @@ var activationFunctionIDs = [
     'Linear',
     'NullFn',
     'Sine',
+    'Sine2',
     'StepFunction'
 ];
 
 describe('Creating Activation Functions:',function(){
+
     testActivation('BipolarSigmoid', 0, 0);
     testActivation('PlainSigmoid', 0,.5);
     testActivation('Gaussian', 0,1);
     testActivation('Linear', -1,1);
     testActivation('NullFn', 1,0);
-    testActivation('Sine', Math.PI/2, 0);
+    testActivation('Sine2', Math.PI/2, 0);
+    testActivation('Sine', Math.PI/2, 1);
     testActivation('StepFunction', .00001,1);
+
+//    it('Should have preloaded all functions now-- missing any means we dont have tests' ,function(done){
+//
+//        //if we aren't equal, we're not testing everything!
+//        activationFunctionIDs.length.should.equal(cppnActivationFactory.Factory.functions.length);
+//        done();
+//    });
+//
 
     //finally, test out a fake activation function
     (function(){
-        var aFunc = neatActivationFactory.Factory.getActivationFunction('FakeActivation')
+        var aFunc = cppnActivationFactory.Factory.getActivationFunction('FakeActivation')
     }).should.throw("Activation Function doesn't exist!");
 });
 
 describe('Random Activation Test',function(){
     var aFunc;
     before(function(done){
-        aFunc = neatActivationFactory.Factory.getRandomActivationFunction()
+        aFunc = cppnActivationFactory.Factory.getRandomActivationFunction()
         done();
     });
 
@@ -91,7 +107,7 @@ describe('Creating a new node',function(){
 
 //  cantorPair tests invalid now
 //    before(function(done){
-//        aFunc = neatActivationFactory.Factory.getActivationFunction(aFunctionID);
+//        aFunc = cppnActivationFactory.Factory.getActivationFunction(aFunctionID);
 //        done();
 //    });
 //
@@ -119,7 +135,7 @@ describe('Creating a new node',function(){
 //    });
 
     before(function(done){
-        aFunc = neatActivationFactory.Factory.getActivationFunction(aFunctionID);
+        aFunc = cppnActivationFactory.Factory.getActivationFunction(aFunctionID);
         node = new neatNode.NeatNode(gid, aFunc, layer, {type: type});
         done();
     });
@@ -133,7 +149,7 @@ describe('Creating a new node',function(){
 
 
     before(function(done){
-        aFunc = neatActivationFactory.Factory.getActivationFunction(aFunctionID);
+        aFunc = cppnActivationFactory.Factory.getActivationFunction(aFunctionID);
         node = new neatNode.NeatNode(gid.toString(), aFunc, layer.toString(), {type: type});
         done();
     });
@@ -157,7 +173,7 @@ describe('Copying a node',function(){
     var type = cppnNode.NodeType.hidden;
 
     before(function(done){
-        aFunc = neatActivationFactory.Factory.getActivationFunction(aFunctionID);
+        aFunc = cppnActivationFactory.Factory.getActivationFunction(aFunctionID);
         node = new neatNode.NeatNode(gid, aFunc, layer, {type: type});
         node = new neatNode.NeatNode.Copy(node);
         done();

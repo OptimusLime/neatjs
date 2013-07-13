@@ -1358,8 +1358,9 @@ describe('Creating a new genome',function(){
         cCount.should.equal(1);
         connectionList.length.should.equal(1);
         connectionList[0].weight.should.equal(weight);
-        //we should have stored the connection object directly
-        (connectionList[0].cat === undefined).should.equal(false);
+        //we should not have stored the connection object directly
+        //we create a copy
+        (connectionList[0].cat === undefined).should.equal(true);
 
         var cloneWeight = (2*utilities.nextDouble()-1)*np.connectionWeightRange/2;
         //this should come into contact with a previous connection, and with overwrite, should be overwritten
