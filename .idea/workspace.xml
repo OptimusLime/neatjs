@@ -5,6 +5,9 @@
     <ignored path="neatjs.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="2600f726-57c9-4b1c-a898-88587476b224" time="1373809243865" ignored="false" />
+    <file path="/multiobjective.js" changelist="2600f726-57c9-4b1c-a898-88587476b224" time="1373817843088" ignored="false" />
+    <file path="/novelty.js" changelist="2600f726-57c9-4b1c-a898-88587476b224" time="1373814950307" ignored="false" />
+    <file path="/neatGenome.js" changelist="2600f726-57c9-4b1c-a898-88587476b224" time="1373817468321" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,64 +27,64 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="neatHelp.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neatHelp/neatHelp.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="35" selection-start="181" selection-end="181" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="neatParameters.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neatHelp/neatParameters.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="274" column="49" selection-start="10950" selection-end="10950" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="genomeSharpToJS.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utility/genomeSharpToJS.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="25" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0">
+            <state line="76" column="8" selection-start="3029" selection-end="3029" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cppnjs.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cppnjs/cppnjs.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="181" column="36" selection-start="5604" selection-end="5604" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cppn.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cppnjs/cppns/cppn.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cppnActivationFunctions.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cppnjs/activationFunctions/cppnActivationFunctions.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="neatGenome.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="neatGenome.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/genome/neatGenome.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="248" column="38" selection-start="9131" selection-end="9149" vertical-scroll-proportion="0.3325031">
+            <state line="63" column="21" selection-start="2615" selection-end="2615" vertical-scroll-proportion="-13.4">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="multiobjective.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/evolution/multiobjective.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="58" column="51" selection-start="2406" selection-end="2406" vertical-scroll-proportion="1.2083334">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="genomeTest.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/genomeTest.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1238" column="39" selection-start="47913" selection-end="47913" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="novelty.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/evolution/novelty.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="16" selection-start="1131" selection-end="1131" vertical-scroll-proportion="-17.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="utilities.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cppnjs/utility/utilities.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="12" selection-start="512" selection-end="512" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="iec.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/evolution/iec.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="3" selection-start="462" selection-end="530" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -132,8 +135,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/cppnjs/utility/utilities.js" />
-        <option value="$PROJECT_DIR$/test/nodejsloadtest.js" />
         <option value="$PROJECT_DIR$/genome/neatConnection.js" />
         <option value="$PROJECT_DIR$/genome/neatNode.js" />
         <option value="$PROJECT_DIR$/neatHelp/neatHelp.js" />
@@ -147,7 +148,9 @@
         <option value="$PROJECT_DIR$/cppnjs/cppnjs.js" />
         <option value="$PROJECT_DIR$/genome/neatMutations.js" />
         <option value="$PROJECT_DIR$/genome/neatMutation.js" />
+        <option value="$PROJECT_DIR$/evolution/novelty.js" />
         <option value="$PROJECT_DIR$/genome/neatGenome.js" />
+        <option value="$PROJECT_DIR$/evolution/multiobjective.js" />
       </list>
     </option>
   </component>
@@ -215,6 +218,34 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="neatjs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="neatjs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="evolution" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="neatjs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="neatjs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cppnjs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope">
@@ -238,6 +269,14 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
     <configuration default="true" type="JavascriptDebugSession" factoryName="Local" singleton="true">
       <JSDebuggerConfigurationSettings>
         <option name="engineId" value="embedded" />
@@ -337,34 +376,11 @@
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/cppnjs/activationFunctions/cppnActivationFactory.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="66" selection-start="47" selection-end="190" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="200" selection-end="200" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/genome/neatConnection.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="24" selection-start="336" selection-end="336" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/neatjs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="136" column="0" selection-start="3698" selection-end="3698" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/nodejsloadtest.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="13" selection-start="472" selection-end="472" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/neatHelp/neatDecoder.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="24" column="76" selection-start="1093" selection-end="1093" vertical-scroll-proportion="0.0" />
@@ -384,16 +400,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utility/genomeSharpToJS.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="25" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cppnjs/cppnjs.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="181" column="36" selection-start="5604" selection-end="5604" vertical-scroll-proportion="0.0">
+        <state line="186" column="36" selection-start="5761" selection-end="5761" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -407,7 +416,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cppnjs/activationFunctions/cppnActivationFunctions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="1" column="0" selection-start="48" selection-end="48" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -433,9 +442,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/utility/genomeSharpToJS.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="8" selection-start="3029" selection-end="3029" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cppnjs/utility/utilities.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="12" selection-start="512" selection-end="512" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/evolution/iec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="3" selection-start="462" selection-end="530" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/genomeTest.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1238" column="39" selection-start="47913" selection-end="47913" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/genome/neatGenome.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="248" column="38" selection-start="9131" selection-end="9149" vertical-scroll-proportion="0.3325031">
+        <state line="63" column="21" selection-start="2615" selection-end="2615" vertical-scroll-proportion="-13.4">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/evolution/novelty.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="16" selection-start="1131" selection-end="1131" vertical-scroll-proportion="-17.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/evolution/multiobjective.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="51" selection-start="2406" selection-end="2406" vertical-scroll-proportion="1.2083334">
           <folding />
         </state>
       </provider>

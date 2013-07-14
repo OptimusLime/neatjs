@@ -18,6 +18,7 @@
     var neatMutation = neatjs.loadLibraryFile('neatjs', 'neatMutation');
     var neatHelp =  neatjs.loadLibraryFile('neatjs', 'neatHelp');
     var neatParameters =  neatjs.loadLibraryFile('neatjs', 'neatParameters');
+    var novelty =  neatjs.loadLibraryFile('neatjs', 'novelty');
 
 
 //var ngNSS = "Neat.Genome";
@@ -35,6 +36,8 @@
         var neatMutation = neatjs.loadLibraryFile('neatjs', 'neatMutation');
         neatHelp =  neatjs.loadLibraryFile('neatjs', 'neatHelp');
         neatParameters =  neatjs.loadLibraryFile('neatjs', 'neatParameters');
+        novelty = neatjs.loadLibraryFile('neatjs', 'novelty');
+
     };
 
 
@@ -54,9 +57,13 @@
 
         self.debug = debug;
 
+        //keep track of behavior for novelty
+        self.behavior = new novelty.Behavior();
+        //keep track of "real" fitness - that is the objective measure we've observed
+        self.realFitness = 0;
+        self.age = 0;
 
-
-
+        self.localObjectivesCompetition = [];
 
         self.meta = {};
 
@@ -276,9 +283,11 @@
 
         //not debuggin
         var gCopy = new exports.NeatGenome((gid !== undefined ? gid : genome.gid), nodeCopy, connectionCopy, genome.inputNodeCount, genome.outputNodeCount, false);
-        console.log('Yet to implement genome behavior copying');
-    //    if(genome.Behavior)
-    //        gCopy.Behavior
+
+        //copy the behavior as well -- if there exists any behavior to copy
+        if(genome.behavior && (genome.behavior.objectives || genome.behavior.behaviorList))
+            gCopy.behavior = novelty.Behavior.BehaviorCopy(genome.behavior);
+
         return gCopy;
     };
 
