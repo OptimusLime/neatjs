@@ -30,7 +30,10 @@
 
         'genomeSharpToJS' :  "/utility/genomeSharpToJS.js",
 
-        'iec' :  "/evolution/iec.js"
+        'iec' :  "/evolution/iec.js",
+        'novelty' :  "/evolution/novelty.js",
+        'multiobjective' :  "/evolution/multiobjective.js"
+
     };
 
     //we export our scripts!
