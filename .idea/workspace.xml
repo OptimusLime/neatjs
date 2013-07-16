@@ -4,11 +4,15 @@
     <list default="true" id="2600f726-57c9-4b1c-a898-88587476b224" name="Default" comment="" />
     <ignored path="neatjs.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="2600f726-57c9-4b1c-a898-88587476b224" time="1373891661782" ignored="false" />
+    <file path="/Dummy.txt" changelist="2600f726-57c9-4b1c-a898-88587476b224" time="1373977084800" ignored="false" />
     <file path="/multiobjective.js" changelist="2600f726-57c9-4b1c-a898-88587476b224" time="1373827740060" ignored="false" />
     <file path="/novelty.js" changelist="2600f726-57c9-4b1c-a898-88587476b224" time="1373814950307" ignored="false" />
     <file path="/neatGenome.js" changelist="2600f726-57c9-4b1c-a898-88587476b224" time="1373817468321" ignored="false" />
     <file path="/neatjs.js" changelist="2600f726-57c9-4b1c-a898-88587476b224" time="1373891721718" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win.js" changelist="2600f726-57c9-4b1c-a898-88587476b224" time="1373894569283" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/package.json" changelist="2600f726-57c9-4b1c-a898-88587476b224" time="1373894569283" ignored="false" />
+    <file path="/winlocal.js" changelist="2600f726-57c9-4b1c-a898-88587476b224" time="1373904071749" ignored="false" />
+    <file path="/winapi.js" changelist="2600f726-57c9-4b1c-a898-88587476b224" time="1373977910300" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,15 +50,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="genomeSharpToJS.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utility/genomeSharpToJS.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="76" column="8" selection-start="3029" selection-end="3029" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="neatGenome.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/genome/neatGenome.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -64,11 +59,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="multiobjective.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="multiobjective.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/evolution/multiobjective.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="0" selection-start="972" selection-end="972" vertical-scroll-proportion="0.3903559">
+            <state line="20" column="0" selection-start="972" selection-end="972" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="winlocal.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/win/winlocal.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="57" selection-start="272" selection-end="272" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="winapi.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/win/winapi.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="27" selection-start="448" selection-end="448" vertical-scroll-proportion="0.34363854">
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -100,19 +117,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="utilities.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cppnjs/utility/utilities.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="12" selection-start="512" selection-end="512" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="iec.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/evolution/iec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="38" selection-start="865" selection-end="865" vertical-scroll-proportion="0.0">
+            <state line="397" column="0" selection-start="13698" selection-end="13823" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -136,9 +144,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/genome/neatConnection.js" />
-        <option value="$PROJECT_DIR$/genome/neatNode.js" />
-        <option value="$PROJECT_DIR$/neatHelp/neatHelp.js" />
         <option value="$PROJECT_DIR$/neatHelp/neatParameters.js" />
         <option value="$PROJECT_DIR$/utility/cantorPair.js" />
         <option value="$PROJECT_DIR$/package.json" />
@@ -152,14 +157,17 @@
         <option value="$PROJECT_DIR$/genome/neatGenome.js" />
         <option value="$PROJECT_DIR$/evolution/multiobjective.js" />
         <option value="$PROJECT_DIR$/neatjs.js" />
+        <option value="$PROJECT_DIR$/evolution/iec.js" />
+        <option value="$PROJECT_DIR$/win/winapi.js" />
+        <option value="$PROJECT_DIR$/win/winlocal.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="1696" />
+    <option name="height" value="1026" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -187,6 +195,16 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -215,18 +233,22 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="evolution" />
+              <option name="myItemId" value="win" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
           <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="neatjs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="neatjs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="evolution" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -235,6 +257,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../winjs" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -269,13 +292,13 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15919873" sideWeight="0.67001116" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18225709" sideWeight="0.67001116" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -354,16 +377,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/cppnjs/cppnjs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="186" column="36" selection-start="5761" selection-end="5761" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cppnjs/cppns/cppn.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cppnjs/activationFunctions/cppnActivationFunctions.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="0" selection-start="48" selection-end="48" vertical-scroll-proportion="0.0" />
@@ -381,23 +394,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/genome/neatMutation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="40" selection-start="383" selection-end="383" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="13" column="40" selection-start="383" selection-end="383" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utility/genomeSharpToJS.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="8" selection-start="3029" selection-end="3029" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="76" column="8" selection-start="3029" selection-end="3029" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cppnjs/utility/utilities.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="12" selection-start="512" selection-end="512" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="24" column="12" selection-start="512" selection-end="512" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/genomeTest.js">
@@ -442,17 +449,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/evolution/iec.js">
+    <entry file="file://$PROJECT_DIR$/evolution/multiobjective.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="38" selection-start="865" selection-end="865" vertical-scroll-proportion="0.0">
+        <state line="20" column="0" selection-start="972" selection-end="972" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/evolution/multiobjective.js">
+    <entry file="file://$PROJECT_DIR$/evolution/iec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="972" selection-end="972" vertical-scroll-proportion="0.3903559">
+        <state line="397" column="0" selection-start="13698" selection-end="13823" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/win/winlocal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="57" selection-start="272" selection-end="272" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/win/winapi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="27" selection-start="448" selection-end="448" vertical-scroll-proportion="0.34363854">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
