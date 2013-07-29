@@ -13,7 +13,6 @@
     },
     "bugs" : "https://github.com/OptimusLime/neatjs/issues",
     "license":"MIT",
-    "private": true,
     "dependencies": {
         "cppn" : "0.x.x",
         "mocha": "1.1.x",

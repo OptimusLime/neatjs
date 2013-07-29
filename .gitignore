@@ -2,6 +2,7 @@
 node_modules
 obj
 bin
+npm-debug*
 packages
 [Oo]bj
 [Bb]in
