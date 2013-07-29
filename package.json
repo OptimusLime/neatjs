@@ -1,5 +1,5 @@
 {
-    "name": "neat",
+    "name": "neatjs",
     "description": "NeuroEvolution of Augmenting Topologies (NEAT) implemented in Javascript (with tests done in Mocha for verification). Can be used as a node module or in a browser",
     "keywords": ["Neural Network", "NN", "Artificial Neural Networks", "ANN", "CPPN", "NEAT", "HyperNEAT"],
     "author" : { "name": "Paul Szerlip",
