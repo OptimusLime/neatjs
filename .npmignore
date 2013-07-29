@@ -1,0 +1,7 @@
+.git*
+docs/
+examples/
+support/
+test/
+cppnjs/
+.DS_Store
