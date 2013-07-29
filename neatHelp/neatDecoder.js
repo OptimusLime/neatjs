@@ -7,7 +7,7 @@
     var neatDecoder = exports;
 
     //we have to load any dependencies first!
-    var cppnjs = isBrowser ? selfBrowser['common'] : require('../cppnjs/cppnjs.js');
+    var cppnjs = isBrowser ? selfBrowser['common'] : require('cppn');
     var neatjs = isBrowser ? selfBrowser['common'] : require('../neatjs.js');
 
     var cppnNode = cppnjs.loadLibraryFile('cppnjs', 'cppnNode');

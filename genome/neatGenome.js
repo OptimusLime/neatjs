@@ -4,7 +4,7 @@
     //we've defined our top level holder of things, in nodejs or browser
 
     //load dependencies first!
-    var cppnjs = isBrowser ? selfBrowser['common'] : require('../cppnjs/cppnjs.js');
+    var cppnjs = isBrowser ? selfBrowser['common'] : require('cppn');
     var neatjs = isBrowser ? selfBrowser['common'] : require('../neatjs.js');
 
     //load cppnjs objects

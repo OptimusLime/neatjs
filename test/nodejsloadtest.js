@@ -1,4 +1,4 @@
-var cppnjs = require('../cppnjs/cppnjs.js');
+var cppnjs = require('cppn');
 var neatjs = require('../neatjs.js');
 
 

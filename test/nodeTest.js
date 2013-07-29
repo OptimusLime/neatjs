@@ -2,13 +2,14 @@ var assert = require('assert');
 var should = require('should');
 
 
-var common = require('../cppnjs/cppnjs.js');
-var cppnActivationFunctions =  common.loadLibraryFile('cppnjs', 'cppnActivationFunctions');
-var cppnActivationFactory =  common.loadLibraryFile('cppnjs', 'cppnActivationFactory');
+var cppnjs = require('cppn');
+
+var cppnActivationFunctions =  cppnjs.loadLibraryFile('cppnjs', 'cppnActivationFunctions');
+var cppnActivationFactory =  cppnjs.loadLibraryFile('cppnjs', 'cppnActivationFactory');
+var cppnNode =cppnjs.loadLibraryFile('cppnjs', 'cppnNode');
 
 var neatNode = require('../genome/neatNode.js');
 //var neatActivationFactory = require('../cppnjs/activationFunctions/cppnActivationFactory.js');
-var cppnNode = require('../cppnjs/components/cppnNode.js');
 
 var testActivation = function(functionString, value, functionValue)
 {

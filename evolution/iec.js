@@ -2,7 +2,7 @@
 
     var iec = exports;
 
-    var cppnjs = isBrowser ? selfBrowser['common'] : require('../cppnjs/cppnjs.js');
+    var cppnjs = isBrowser ? selfBrowser['common'] : require('cppn');
     var neatjs = isBrowser ? selfBrowser['common'] : require('../neatjs.js');
 
     var utilities =  cppnjs.loadLibraryFile('cppnjs', 'utilities');

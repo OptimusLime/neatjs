@@ -9,10 +9,10 @@ var neatNode = require('../genome/neatNode.js');
 var neatConnection = require('../genome/neatConnection.js');
 var neatGenome = require('../genome/neatGenome.js');
 
-var cppns = require('../cppnjs/cppns/cppn.js');
-var cppnConnection = require('../cppnjs/components/cppnConnection.js');
-var cppnNode = require('../cppnjs/components/cppnNode.js');
-var cppnActivationFactory = require('../cppnjs/activationFunctions/cppnActivationFactory.js');
+var cppnjs = require('cppn');
+var cppnConnection = cppnjs.loadLibraryFile('cppnjs', 'cppnConnection');// require('../cppnjs/components/cppnConnection.js');
+var cppnNode = cppnjs.loadLibraryFile('cppnjs', 'cppnNode');//require('../cppnjs/components/cppnNode.js');
+var cppnActivationFactory = cppnjs.loadLibraryFile('cppnjs', 'cppnActivationFactory');//require('../cppnjs/activationFunctions/cppnActivationFactory.js');
 
 describe('Testing C# to JS Genome converstion',function(){
 

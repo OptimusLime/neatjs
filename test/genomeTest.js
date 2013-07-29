@@ -7,17 +7,21 @@ console.log('Testing Neat Genome function by function')
 
 
 
+
 describe('Creating a new genome',function(){
 
     var neatGenome = require('../genome/neatGenome.js');
     var neatNode = require('../genome/neatNode.js');
     var neatConnection = require('../genome/neatConnection.js');
     var cantorPair = require('../utility/cantorPair');
-    var cppnActivationFactory = require('../cppnjs/activationFunctions/cppnActivationFactory.js');
+    var cppnjs = require('cppn');
+    var cppnActivationFactory = cppnjs.loadLibraryFile('cppnjs', 'cppnActivationFactory');
+    var cppnNode = cppnjs.loadLibraryFile('cppnjs', 'cppnNode');
+    var utilities = cppnjs.loadLibraryFile('cppnjs', 'utilities');
+
     var neatParameters = require('../neatHelp/neatParameters.js');
-    var utilities = require('../cppnjs/utility/utilities.js');
     var neatHelp = require('../neatHelp/neatHelp.js');
-    var cppnNode = require('../cppnjs/components/cppnNode.js');
+
 
     var crNode = function(gid){
         return new neatNode.NeatNode(gid,

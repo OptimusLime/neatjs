@@ -5,7 +5,7 @@
     "author" : { "name": "Paul Szerlip",
         "email": "Paul.Szerlip@cs.ucf.edu",
         "url": "http://designforcode.com/" },
-    "version": "0.2",
+    "version": "0.2.0",
     "main":"neatjs.js",
     "repository": {
         "type": "git",
@@ -15,7 +15,7 @@
     "license":"MIT",
     "private": true,
     "dependencies": {
-        "cppnjs" : "0.x.x",
+        "cppn" : "0.x.x",
         "mocha": "1.1.x",
         "should": "1.1.x",
         "xml2js" : "0.2.x"
