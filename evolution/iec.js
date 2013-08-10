@@ -31,7 +31,7 @@
 
     };
 
-    //seeds are required
+    //seeds are required -- and are expected to be the correct neatGenome types
     iec.GenericIEC = function(np, seeds, iecOptions)
     {
         var self = this;
@@ -45,6 +45,18 @@
 
         //we can send in a seed genome -- to create generic objects when necessary
         self.seeds = seeds;
+
+        for(var s=0; s < seeds.length; s++)
+        {
+            var seed = seeds[s];
+            for(var c =0; c < seed.connections.length; c++)
+            {
+                var sConn = seed.connections[c];
+                var cid = '(' + sConn.sourceID + ',' + sConn.targetID + ')';
+                self.newConnections[cid] = sConn;
+            }
+        }
+
 
         iec.GenericIEC.prototype.cloneSeed = function(){
 
@@ -507,7 +519,6 @@
 
 
     }
-
 
 
 })(typeof exports === 'undefined'? this['neatjs']['iec']={}: exports, this, typeof exports === 'undefined'? true : false);
