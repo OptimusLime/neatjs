@@ -31,6 +31,118 @@
 
     };
 
+    //seeds are required
+    iec.GenericIEC = function(np, seeds, iecOptions)
+    {
+        var self = this;
+
+        self.options = iecOptions || {};
+        self.np = np;
+
+        //we keep track of new nodes and connections for the session
+        self.newNodes = {};
+        self.newConnections = {};
+
+        //we can send in a seed genome -- to create generic objects when necessary
+        self.seeds = seeds;
+
+        iec.GenericIEC.prototype.cloneSeed = function(){
+
+            var seedIx = utilities.next(self.seeds.length);
+
+            var seedCopy = neatGenome.NeatGenome.Copy(self.seeds[seedIx]);
+            if(self.options.seedMutationCount)
+            {
+                for(var i=0; i < self.options.seedMutationCount; i++)
+                    seedCopy.mutate(self.newNodes, self.newConnections, self.np);
+            }
+            return seedCopy;
+        };
+
+        //this function handles creating a genotype from sent in parents.
+        //it's pretty simple -- however many parents you have, select a random number of them, and attempt to mate them
+        iec.GenericIEC.prototype.createNextGenome = function(parents)
+        {
+            //IF we have 0 parents, we create a genome with the default configurations
+            var ng;
+            var initialMutationCount = self.options.initialMutationCount || 0,
+                postXOMutationCount = self.options.postMutationCount || 0;
+
+            var responsibleParents = [];
+
+            switch(parents.length)
+            {
+                case 0:
+
+                    //parents are empty -- start from scratch!
+                    ng = self.cloneSeed();
+
+                    for(var m=0; m < initialMutationCount; m++)
+                        ng.mutate(self.newNodes, self.newConnections, self.np);
+
+                    //no responsible parents
+
+                    break;
+                case 1:
+
+                    //we have one parent
+                    //asexual reproduction
+                    ng = parents[0].createOffspringAsexual(self.newNodes, self.newConnections, self.np);
+
+                    //parent at index 0 responsible
+                    responsibleParents.push(0);
+
+                    break;
+                default:
+                    //greater than 1 individual as a possible parent
+
+                    //at least 1 parent, and at most self.activeParents.count # of parents
+                    var parentCount = 1 + utilities.next(parents.length);
+
+                    if(parentCount == 1)
+                    {
+                        //select a single parent for offspring
+                        var rIx = utilities.next(parents.length);
+
+                        ng = parents[rIx].createOffspringAsexual(self.newNodes, self.newConnections, self.np);
+                        //1 responsible parent at index 0
+                        responsibleParents.push(rIx);
+                        break;
+                    }
+
+                    //we expect active parents to be small, so we grab parentCount number of parents from a small array of parents
+                    var parentIxs = utilities.RouletteWheel.selectXFromSmallObject(parentCount, parents);
+
+                    var p1 = parents[parentIxs[0]], p2;
+                    //if I have 3 parents, go in order composing the objects
+
+                    responsibleParents.push(parentIxs[0]);
+
+                    //p1 mates with p2 to create o1, o1 mates with p3, to make o2 -- p1,p2,p3 are all combined now inside of o2
+                    for(var i=1; i < parentIxs.length; i++)
+                    {
+                        p2 = parents[parentIxs[i]];
+                        ng = p1.createOffspringSexual(p2, self.np);
+                        p1 = ng;
+                        responsibleParents.push(parentIxs[i]);
+                    }
+
+                    for(var m=0; m < postXOMutationCount; m++)
+                        ng.mutate(self.newNodes, self.newConnections, self.np);
+
+
+                    break;
+            }
+
+            //we have our genome, let's send it back
+
+            //the reason we don't end it inisde the switch loop is that later, we might be interested in saving this genome from some other purpose
+            return {offspring: ng, parents: responsibleParents};
+        };
+
+    };
+
+
     iec.BasicIEC = function(genomeSettings, genomeFunctions)
     {
         var self = this;
@@ -65,7 +177,7 @@
             genomeSettings.activationFunctions.forEach(function(func){
                 //every function equally likely to happen
                 aFunc[func] = prob;
-             });
+            });
 
             cppnActivationFactory.Factory.setProbabilities(aFunc);
         }
@@ -95,7 +207,6 @@
 
             self.seed = self.createSimpleGenome(self.inputCount, self.outputCount, self.np.connectionWeightRange, self.np.pInitialPopulationInterconnections, self.existingConnectionIDs);
         }
-
 
         //how many times to mutate a genome after creating before returning to processs
         self.seedMutationCount = genomeSettings.seedMutationCount;
@@ -222,7 +333,7 @@
         {
 
             for(var i=0; i < this.seedMutationCount; i++)
-               seedCopy.mutate(this.newNodes, this.newConnections, this.np);
+                seedCopy.mutate(this.newNodes, this.newConnections, this.np);
         }
         return seedCopy;
 
@@ -260,7 +371,9 @@
 
                 if(parentCount == 1)
                 {
-                    ng = self.parentList[0].createOffspringAsexual(self.newNodes, self.newConnections, self.np);
+                    //before, we selected first object as parent -- should be random ix
+                    var rIx = utilities.next(self.parentList.length);
+                    ng = self.parentList[rIx].createOffspringAsexual(self.newNodes, self.newConnections, self.np);
                     break;
                 }
 
@@ -329,10 +442,10 @@
         for(var i=0; i < oCount; i++)
             nodes.push(
                 new neatNode.NeatNode(
-                nid++,
-                (specificActivation ? specificActivation[i] : defaultActivation),
-                10,
-                {type: cppnNode.NodeType.output}));
+                    nid++,
+                    (specificActivation ? specificActivation[i] : defaultActivation),
+                    10,
+                    {type: cppnNode.NodeType.output}));
 
 
         var hCount = seedParameters.hiddenCount;
