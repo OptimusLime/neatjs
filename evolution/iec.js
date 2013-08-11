@@ -57,7 +57,6 @@
             }
         }
 
-
         iec.GenericIEC.prototype.cloneSeed = function(){
 
             var seedIx = utilities.next(self.seeds.length);
@@ -71,10 +70,27 @@
             return seedCopy;
         };
 
-        //this function handles creating a genotype from sent in parents.
+        iec.GenericIEC.prototype.markParentConnections = function(parents){
+
+            for(var s=0; s < parents.length; s++)
+            {
+                var parent = parents[s];
+                for(var c =0; c < parent.connections.length; c++)
+                {
+                    var sConn = parent.connections[c];
+                    var cid = '(' + sConn.sourceID + ',' + sConn.targetID + ')';
+                    self.newConnections[cid] = sConn;
+                }
+            }
+
+        };
+
+
+            //this function handles creating a genotype from sent in parents.
         //it's pretty simple -- however many parents you have, select a random number of them, and attempt to mate them
         iec.GenericIEC.prototype.createNextGenome = function(parents)
         {
+            self.markParentConnections(parents);
             //IF we have 0 parents, we create a genome with the default configurations
             var ng;
             var initialMutationCount = self.options.initialMutationCount || 0,
