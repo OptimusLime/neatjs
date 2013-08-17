@@ -15,6 +15,10 @@
     "license":"MIT",
     "dependencies": {
         "cppn" : "0.x.x",
+        "xml2js" : "0.2.x"
+    },
+    "devDependencies": {
+        "cppn" : "0.x.x",
         "mocha": "1.1.x",
         "should": "1.1.x",
         "xml2js" : "0.2.x"
