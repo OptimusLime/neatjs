@@ -33,7 +33,7 @@
         //laod our neatjs objects now
         neatConnection = neatjs.loadLibraryFile('neatjs', 'neatConnection');
         neatNode = neatjs.loadLibraryFile('neatjs', 'neatNode');
-        var neatMutation = neatjs.loadLibraryFile('neatjs', 'neatMutation');
+        neatMutation = neatjs.loadLibraryFile('neatjs', 'neatMutation');
         neatHelp =  neatjs.loadLibraryFile('neatjs', 'neatHelp');
         neatParameters =  neatjs.loadLibraryFile('neatjs', 'neatParameters');
         novelty = neatjs.loadLibraryFile('neatjs', 'novelty');
