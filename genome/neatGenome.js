@@ -15,7 +15,7 @@
     //load neatjs objects, order doesn't matter, just organized this way
     var neatConnection = neatjs.loadLibraryFile('neatjs', 'neatConnection');
     var neatNode = neatjs.loadLibraryFile('neatjs', 'neatNode');
-    var neatMutation = neatjs.loadLibraryFile('neatjs', 'neatMutation');
+//    var neatMutation = neatjs.loadLibraryFile('neatjs', 'neatMutation');
     var neatHelp =  neatjs.loadLibraryFile('neatjs', 'neatHelp');
     var neatParameters =  neatjs.loadLibraryFile('neatjs', 'neatParameters');
     var novelty =  neatjs.loadLibraryFile('neatjs', 'novelty');
@@ -33,7 +33,7 @@
         //laod our neatjs objects now
         neatConnection = neatjs.loadLibraryFile('neatjs', 'neatConnection');
         neatNode = neatjs.loadLibraryFile('neatjs', 'neatNode');
-        neatMutation = neatjs.loadLibraryFile('neatjs', 'neatMutation');
+//        neatMutation = neatjs.loadLibraryFile('neatjs', 'neatMutation');
         neatHelp =  neatjs.loadLibraryFile('neatjs', 'neatHelp');
         neatParameters =  neatjs.loadLibraryFile('neatjs', 'neatParameters');
         novelty = neatjs.loadLibraryFile('neatjs', 'novelty');
@@ -48,7 +48,7 @@
         self.gid = gid;
         self.fitness = 0;
 
-    // From C#: Ensure that the connectionGenes are sorted by innovation ID at all times.
+        // From C#: Ensure that the connectionGenes are sorted by innovation ID at all times.
         self.nodes = nodes;
         self.connections = connections;
 
@@ -72,23 +72,23 @@
 //        self.gid = //get hash
 
 
-    // From C#: For efficiency we store the number of input and output neurons. These two quantities do not change
+        // From C#: For efficiency we store the number of input and output neurons. These two quantities do not change
 // throughout the life of a genome. Note that inputNeuronCount does NOT include the bias neuron! use inputAndBiasNeuronCount.
 // We also keep all input(including bias) neurons at the start of the neuronGeneList followed by
 // the output neurons.
-    self.inputNodeCount= incount;
-    self.inputAndBiasNodeCount= incount+1;
-    self.outputNodeCount= outcount;
-    self.inputBiasOutputNodeCount= self.inputAndBiasNodeCount + self.outputNodeCount;
-    self.inputBiasOutputNodeCountMinus2= self.inputBiasOutputNodeCount -2;
+        self.inputNodeCount= incount;
+        self.inputAndBiasNodeCount= incount+1;
+        self.outputNodeCount= outcount;
+        self.inputBiasOutputNodeCount= self.inputAndBiasNodeCount + self.outputNodeCount;
+        self.inputBiasOutputNodeCountMinus2= self.inputBiasOutputNodeCount -2;
 
 
 
-    self.networkAdaptable= false;
-    self.networkModulatory= false;
-    // Temp tables.
-    self.connectionLookup = null;
-    self.nodeLookup = null;
+        self.networkAdaptable= false;
+        self.networkModulatory= false;
+        // Temp tables.
+        self.connectionLookup = null;
+        self.nodeLookup = null;
 
         /// From C#: A table that keeps a track of which connections have added to the sexually reproduced child genome.
         /// This is cleared on each call to CreateOffspring_Sexual() and is only declared at class level to
@@ -99,7 +99,7 @@
 
         self.parent = null;
 
-};
+    };
 
 
     //Define the helper functions here!
@@ -112,7 +112,7 @@
         return genomeCount++;
     };
     neatGenome.Help.currentGenomeID = function(){
-       return genomeCount;
+        return genomeCount;
     };
     neatGenome.Help.resetGenomeID = function(value){
         if(value ===undefined ){
@@ -208,7 +208,7 @@
         // will obtain the same innovation ID's for the bias,input and output nodes in the initial population.
         // Create a single bias neuron.
         var node = new neatNode.NeatNode(neatGenome.Help.nextInnovationID(iCount++), aFunc, neatNode.INPUT_LAYER, {type: cppnNode.NodeType.bias});
-          //null, idGenerator.NextInnovationId, NeuronGene.INPUT_LAYER, NeuronType.Bias, actFunct, stepCount);
+        //null, idGenerator.NextInnovationId, NeuronGene.INPUT_LAYER, NeuronType.Bias, actFunct, stepCount);
         inputNodeList.push(node);
         nodeList.push(node);
 
@@ -238,7 +238,7 @@
         outputNodeList.forEach(function(targetNode){
 
             inputNodeList.forEach(function(sourceNode){
-            // Always generate an ID even if we aren't going to use it. This is necessary to ensure connections
+                // Always generate an ID even if we aren't going to use it. This is necessary to ensure connections
                 // between the same neurons always have the same ID throughout the generated population.
 
                 if(utilities.nextDouble() < connParams.connectionProportion )
@@ -274,7 +274,7 @@
         var nodeCopy = [], connectionCopy = [];
         genome.nodes.forEach(function(node)
         {
-           nodeCopy.push(neatNode.NeatNode.Copy(node));
+            nodeCopy.push(neatNode.NeatNode.Copy(node));
         });
         genome.connections.forEach(function(conn)
         {
@@ -1051,7 +1051,7 @@
             //newNeuronGene = new NeuronGene(tmpStruct.NewNeuronGene.InnovationId, NeuronType.Hidden, actFunct);
             newNode = neatNode.NeatNode.Copy(tmpStruct.node);
             newNode.type = cppnNode.NodeType.hidden;
-             //new NeuronGene(null, tmpStruct.NewNeuronGene.gid, tmpStruct.NewNeuronGene.Layer, NeuronType.Hidden, actFunct, this.step);
+            //new NeuronGene(null, tmpStruct.NewNeuronGene.gid, tmpStruct.NewNeuronGene.Layer, NeuronType.Hidden, actFunct, this.step);
 
             newConnection1 = new neatConnection.NeatConnection(tmpStruct.connection1.gid, 1.0, {sourceID: connectionToReplace.sourceID, targetID:newNode.gid});
 //                new ConnectionGene(tmpStruct.NewConnectionGene_Input.gid, connectionToReplace.SourceNeuronId, newNeuronGene.gid, 1.0);
@@ -1069,15 +1069,15 @@
         var results = {nodes: [newNode.gid], connections: [newConnection1.gid, newConnection2.gid]};
 
         //we have our targets, and the results, make our object
-        var newMutation = new neatMutation.NeatMutation(
-            neatGenome.Help.nextInnovationID(),
-            "AddNode",
-            targets,
-            results
-            );
+//        var newMutation = new neatMutation.NeatMutation(
+//            neatGenome.Help.nextInnovationID(),
+//            "AddNode",
+//            targets,
+//            results
+//            );
 
         //add mutation to the genome
-        self.mutations.push(newMutation);
+//        self.mutations.push(newMutation);
 
         //in javascript, we return the new node and connections created, since it's so easy!
 //        return {node: newNode, connection1: newConnection1, newConnection2: newConnection2};
@@ -1179,7 +1179,7 @@
                     if(existingConnection==null)
                     {	// Create a new connection with a new ID and add it to the Genome.
                         newConnection = new neatConnection.NeatConnection(nextID,
-                             (utilities.nextDouble()*np.connectionWeightRange/4.0) - np.connectionWeightRange/8.0,
+                            (utilities.nextDouble()*np.connectionWeightRange/4.0) - np.connectionWeightRange/8.0,
                             {sourceID: sourceID, targetID: targetID});
 
 //                            new ConnectionGene(ea.NextInnovationId, sourceID, targetID,
@@ -1213,15 +1213,15 @@
                     var results = {connections: [newConnection.gid]};
 
                     //we have our targets, and the results, make our object
-                    var newMutation = new neatMutation.NeatMutation(
-                        neatGenome.Help.nextInnovationID(),
-                        "AddConnection",
-                        targets,
-                        results
-                    );
-
-                    //add mutation to the genome
-                    self.mutations.push(newMutation);
+//                    var newMutation = new neatMutation.NeatMutation(
+//                        neatGenome.Help.nextInnovationID(),
+//                        "AddConnection",
+//                        targets,
+//                        results
+//                    );
+//
+//                    //add mutation to the genome
+//                    self.mutations.push(newMutation);
 
                     return true;
                 }
@@ -1242,7 +1242,7 @@
         var probabilties = [];
 
         np.connectionMutationParameterGroupList.forEach(function(connMut){
-           probabilties.push(connMut.activationProportion);
+            probabilties.push(connMut.activationProportion);
         });
 
         // Get a reference to the group we will be using.
@@ -1321,8 +1321,8 @@
                 connection.weight = Math.min(connection.weight, np.connectionWeightRange/2.0);
                 break;
             }
-                //Paul - not implementing cause Randlib.gennor is a terribel terrible function
-                //if i need normal distribution, i'll find another javascript source
+            //Paul - not implementing cause Randlib.gennor is a terribel terrible function
+            //if i need normal distribution, i'll find another javascript source
 //            case neatParameters.ConnectionPerturbationType.jiggleND:
 //            {
 //                connectionGene.weight += RandLib.gennor(0, paramGroup.Sigma);
@@ -1351,12 +1351,12 @@
 /// </summary>
     exports.NeatGenome.prototype.isNeuronRedundant=function(nodeLookup, nid)
     {
-         var self = this;
+        var self = this;
         var node = nodeLookup[nid];
         if (node.type != cppnNode.NodeType.hidden
             || node.activationFunction.functionID === 'ModuleInputNeuron'
-    || node.activationFunction.functionID === 'ModuleOutputNeuron')
-        return false;
+            || node.activationFunction.functionID === 'ModuleOutputNeuron')
+            return false;
 
         return !self.isNeuronConnected(nid);
     };
@@ -1445,7 +1445,7 @@
     };
     exports.NeatGenome.prototype.buildNeuronConnectionLookupTable = function()
     {
-         var self = this;
+        var self = this;
         self.nodeLookup = neatGenome.Help.CreateGIDLookup(self.nodes);
 
         var nodeConnectionLookup = {};
@@ -1493,10 +1493,10 @@
             // All neurons that are part of a module would appear to be dead-ended, but skip removing them anyway.
             if (lookup.node.type == cppnNode.NodeType.hidden
                 && !(lookup.node.activationFunction.functionID == 'ModuleInputNeuron')
-        && !(lookup.node.activationFunction.functionID == 'ModuleOutputNeuron') ) {
-            if((lookup.incoming.length<=1) || (lookup.outgoing.length<=1))
-                simpleNeuronIdList.push(lookup.node.gid);
-        }
+                && !(lookup.node.activationFunction.functionID == 'ModuleOutputNeuron') ) {
+                if((lookup.incoming.length<=1) || (lookup.outgoing.length<=1))
+                    simpleNeuronIdList.push(lookup.node.gid);
+            }
         }
 
         // Are there any candiate simple neurons?
@@ -1523,49 +1523,49 @@
 
         lookup.incoming.forEach(function(incomingConnection)
         {
-           lookup.outgoing.forEach(function(outgoingConnection){
+            lookup.outgoing.forEach(function(outgoingConnection){
 
-               if(!self.testForExistingConnectionInnovation(incomingConnection.sourceID, outgoingConnection.targetID))
-               {	// Connection doesnt already exists.
+                if(!self.testForExistingConnectionInnovation(incomingConnection.sourceID, outgoingConnection.targetID))
+                {	// Connection doesnt already exists.
 
-                   // Test for matching connection within NewConnectionGeneTable.
-                   var connectionKey =  "(" + incomingConnection.sourceID + "," + outgoingConnection.targetID + ")";
+                    // Test for matching connection within NewConnectionGeneTable.
+                    var connectionKey =  "(" + incomingConnection.sourceID + "," + outgoingConnection.targetID + ")";
 
-                       //new ConnectionEndpointsStruct(incomingConnection.SourceNeuronId,
+                    //new ConnectionEndpointsStruct(incomingConnection.SourceNeuronId,
 //                   outgoi//ngConnection.TargetNeuronId);
-                   var existingConnection = newConnectionTable[connectionKey];
-                   var newConnection;
-                   var nextID = neatGenome.Help.nextInnovationID();
-                   if(existingConnection==null)
-                   {	// No matching connection found. Create a connection with a new ID.
-                       newConnection = new neatConnection.NeatConnection(nextID,
-                           (utilities.nextDouble() * np.connectionWeightRange) - np.connectionWeightRange/2.0,
-                           {sourceID:incomingConnection.sourceID, targetID: outgoingConnection.targetID});
+                    var existingConnection = newConnectionTable[connectionKey];
+                    var newConnection;
+                    var nextID = neatGenome.Help.nextInnovationID();
+                    if(existingConnection==null)
+                    {	// No matching connection found. Create a connection with a new ID.
+                        newConnection = new neatConnection.NeatConnection(nextID,
+                            (utilities.nextDouble() * np.connectionWeightRange) - np.connectionWeightRange/2.0,
+                            {sourceID:incomingConnection.sourceID, targetID: outgoingConnection.targetID});
 //                           new ConnectionGene(ea.NextInnovationId,
 //                           incomingConnection.SourceNeuronId,
 //                           outgoingConnection.TargetNeuronId,
 //                           (Utilities.NextDouble() * ea.NeatParameters.connectionWeightRange) - ea.NeatParameters.connectionWeightRange/2.0);
 
-                       // Register the new ID with NewConnectionGeneTable.
-                       newConnectionTable[connectionKey] = newConnection;
+                        // Register the new ID with NewConnectionGeneTable.
+                        newConnectionTable[connectionKey] = newConnection;
 
-                       // Add the new gene to the genome.
-                       self.connections.push(newConnection);
-                   }
-                   else
-                   {	// Matching connection found. Re-use its ID.
-                       newConnection = new neatConnection.NeatConnection(existingConnection.gid,
-                           (utilities.nextDouble() * np.connectionWeightRange) - np.connectionWeightRange/2.0,
-                           {sourceID:incomingConnection.sourceID, targetID: outgoingConnection.targetID});
+                        // Add the new gene to the genome.
+                        self.connections.push(newConnection);
+                    }
+                    else
+                    {	// Matching connection found. Re-use its ID.
+                        newConnection = new neatConnection.NeatConnection(existingConnection.gid,
+                            (utilities.nextDouble() * np.connectionWeightRange) - np.connectionWeightRange/2.0,
+                            {sourceID:incomingConnection.sourceID, targetID: outgoingConnection.targetID});
 
-                       // Add the new gene to the genome. Use InsertIntoPosition() to ensure we don't break the sort
-                       // order of the connection genes.
-                       neatGenome.Help.insertByInnovation(newConnection, self.connections);
-                   }
+                        // Add the new gene to the genome. Use InsertIntoPosition() to ensure we don't break the sort
+                        // order of the connection genes.
+                        neatGenome.Help.insertByInnovation(newConnection, self.connections);
+                    }
 
-               }
+                }
 
-           });
+            });
 
         });
 
