@@ -145,7 +145,7 @@ describe('Creating a new node',function(){
         node.should.have.property('gid', gid);
         node.should.have.property('activationFunction',aFunc.functionID);
         node.should.have.property('layer',layer);
-        node.should.have.property('type',type);
+        node.should.have.property('nodeType',type);
     });
 
 
@@ -184,6 +184,6 @@ describe('Copying a node',function(){
         node.should.have.property('gid', gid);
         node.should.have.property('activationFunction', aFunc.functionID);
         node.should.have.property('layer',layer);
-        node.should.have.property('type',type);
+        node.should.have.property('nodeType',type);
     });
 });

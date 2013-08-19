@@ -79,12 +79,12 @@ describe('Creating a new genome',function(){
             (typeof node.gid).should.equal('number');
             (typeof node.activationFunction).should.equal('string');
             (typeof node.layer).should.equal('number');
-            (typeof node.type).should.equal('string');
-            if(node.type == cppnNode.NodeType.input)
+            (typeof node.nodeType).should.equal('string');
+            if(node.nodeType == cppnNode.NodeType.input)
                 ins++;
-            else if(node.type == cppnNode.NodeType.output)
+            else if(node.nodeType == cppnNode.NodeType.output)
                 outs++;
-            else if(node.type == cppnNode.NodeType.bias)
+            else if(node.nodeType == cppnNode.NodeType.bias)
                 bias++;
 
         });
@@ -402,7 +402,7 @@ describe('Creating a new genome',function(){
             (keyCount+duplicates).should.equal(i+1);
 
             //when we add nodes, they get tacked onto nodes, and we added a node, so it should be a hidden node
-            ng.nodes[ng.nodes.length-1].type.should.equal(cppnNode.NodeType.hidden);
+            ng.nodes[ng.nodes.length-1].nodeType.should.equal(cppnNode.NodeType.hidden);
 
         }
 
@@ -889,7 +889,7 @@ describe('Creating a new genome',function(){
 
         ng.nodes.forEach(function(node){
             //all hidden nodes should be redundant because there aren't any connections
-            if(node.type == cppnNode.NodeType.hidden)
+            if(node.nodeType == cppnNode.NodeType.hidden)
                 ng.isNeuronRedundant(nodeLookup,node.gid).should.equal(true);
             //all input/output will be not redundant by constrcution (can't remove inputs/outputs duh!)
             else
@@ -917,7 +917,7 @@ describe('Creating a new genome',function(){
         var hiddenConnections = [];
         for(var i=ng.nodes.length-1; i >= 0; i--)
         {
-            if(ng.nodes[i].type == cppnNode.NodeType.hidden)
+            if(ng.nodes[i].nodeType == cppnNode.NodeType.hidden)
             {
                 hiddenNode = ng.nodes[i];
                 hiddenGid = ng.nodes[i].gid;
@@ -1027,7 +1027,7 @@ describe('Creating a new genome',function(){
             var node = nodeLookup[lKey];
             info = lookup[lKey];
 
-            switch(node.type)
+            switch(node.nodeType)
             {
                 //only 1 hidden node!
                 case cppnNode.NodeType.hidden:
@@ -1101,7 +1101,7 @@ describe('Creating a new genome',function(){
             break;
         }
 
-        hiddenNode.type.should.equal(cppnNode.NodeType.hidden);
+        hiddenNode.nodeType.should.equal(cppnNode.NodeType.hidden);
 
         //need some parameters
         var np = new neatParameters.NeatParameters();
@@ -1240,7 +1240,7 @@ describe('Creating a new genome',function(){
             var nCount= 0;
             var cCount = 0;
             genome.nodes.forEach(function(node){
-                snapNodes[node.gid] = {gid: node.gid, type: node.type, activationFunction: node.activationFunction.functionID, layer: node.layer};
+                snapNodes[node.gid] = {gid: node.gid, type: node.nodeType, activationFunction: node.activationFunction.functionID, layer: node.layer};
                 nCount++;
             });
 

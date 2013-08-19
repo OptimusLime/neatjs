@@ -49,7 +49,7 @@ describe('Testing C# to JS Genome converstion',function(){
                 node.gid.should.equal(parseFloat(other.id));
                 node.activationFunction.should.equal(other.activationFunction);
                 node.layer.should.equal(parseFloat(other.layer));
-                node.type.should.equal(genomeSharpToJS.NeuronTypeToNodeType(other.type));
+                node.nodeType.should.equal(genomeSharpToJS.NeuronTypeToNodeType(other.type));
             }
             for(var c =0; c < ng.connections.length; c++)
             {

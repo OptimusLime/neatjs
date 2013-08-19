@@ -593,7 +593,7 @@
 
         self.nodes.forEach(function(node)
         {
-            if(node.type != cppnNode.NodeType.hidden)
+            if(node.nodeType != cppnNode.NodeType.hidden)
             {
                 newNodeList.push(new neatNode.NeatNode.Copy(node));
                 newNodeTable[node.gid] = node;
@@ -1050,7 +1050,7 @@
             var tmpStruct = existingNeuronGeneStruct;
             //newNeuronGene = new NeuronGene(tmpStruct.NewNeuronGene.InnovationId, NeuronType.Hidden, actFunct);
             newNode = neatNode.NeatNode.Copy(tmpStruct.node);
-            newNode.type = cppnNode.NodeType.hidden;
+            newNode.nodeType = cppnNode.NodeType.hidden;
             //new NeuronGene(null, tmpStruct.NewNeuronGene.gid, tmpStruct.NewNeuronGene.Layer, NeuronType.Hidden, actFunct, this.step);
 
             newConnection1 = new neatConnection.NeatConnection(tmpStruct.connection1.gid, 1.0, {sourceID: connectionToReplace.sourceID, targetID:newNode.gid});
@@ -1148,7 +1148,7 @@
                 // Neurons cannot be outputs if they are dummy input or output nodes of a module, or network input or bias nodes.
                 self.nodes.forEach(function(n)
                 {
-                    if(n.type != cppnNode.NodeType.bias && n.type != cppnNode.NodeType.input &&
+                    if(n.nodeType != cppnNode.NodeType.bias && n.nodeType != cppnNode.NodeType.input &&
                         n.activationFunction.functionID !== 'ModuleInputNeuron'
                         &&  n.activationFunction.functionID !== 'ModuleOutputNeuron')
                         potentialOutputs.push(n);
@@ -1353,7 +1353,7 @@
     {
         var self = this;
         var node = nodeLookup[nid];
-        if (node.type != cppnNode.NodeType.hidden
+        if (node.nodeType != cppnNode.NodeType.hidden
             || node.activationFunction.functionID === 'ModuleInputNeuron'
             || node.activationFunction.functionID === 'ModuleOutputNeuron')
             return false;
@@ -1491,7 +1491,7 @@
             // RemoveSimpleNeuron is then able to delete these neurons from the network structure along with any
             // associated connections.
             // All neurons that are part of a module would appear to be dead-ended, but skip removing them anyway.
-            if (lookup.node.type == cppnNode.NodeType.hidden
+            if (lookup.node.nodeType == cppnNode.NodeType.hidden
                 && !(lookup.node.activationFunction.functionID == 'ModuleInputNeuron')
                 && !(lookup.node.activationFunction.functionID == 'ModuleOutputNeuron') ) {
                 if((lookup.incoming.length<=1) || (lookup.outgoing.length<=1))

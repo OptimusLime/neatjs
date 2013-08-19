@@ -16,7 +16,7 @@
         //let cppns deal with actual act functions
         self.activationFunction = aFunc.functionID || aFunc;
 
-        self.type = typeObj.type;
+        self.nodeType = typeObj.type;
 
         self.layer = (typeof layer === 'string' ? parseFloat(layer) : layer);
 
@@ -28,7 +28,7 @@
 
     exports.NeatNode.Copy = function(otherNode)
     {
-        return new neatNode.NeatNode(otherNode.gid, otherNode.activationFunction, otherNode.layer, {type: otherNode.type});
+        return new neatNode.NeatNode(otherNode.gid, otherNode.activationFunction, otherNode.layer, {type: otherNode.nodeType});
     };
 
 

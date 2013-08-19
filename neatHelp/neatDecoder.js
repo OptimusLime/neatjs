@@ -49,7 +49,7 @@
         for(; nodeIdx<neuronGeneCount; nodeIdx++)
         {
             activationFunctionArray[nodeIdx] = cppnActivationFactory.Factory.getActivationFunction(ng.nodes[nodeIdx].activationFunction);
-            if(ng.nodes[nodeIdx].type !=  cppnNode.NodeType.bias)
+            if(ng.nodes[nodeIdx].nodeType !=  cppnNode.NodeType.bias)
                 break;
         }
         var biasNodeCount = nodeIdx;
