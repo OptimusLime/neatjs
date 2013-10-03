@@ -20,7 +20,6 @@
     var neatParameters =  neatjs.loadLibraryFile('neatjs', 'neatParameters');
     var novelty =  neatjs.loadLibraryFile('neatjs', 'novelty');
 
-
 //var ngNSS = "Neat.Genome";
 //var ngNS = namespace(ngNSS);
     exports.CheckDependencies = function()
@@ -956,6 +955,7 @@
         probabilities.push(np.pMutateDeleteConnection);
         probabilities.push(np.pMutateDeleteSimpleNeuron);
         probabilities.push(np.pMutateConnectionWeights);
+        probabilities.push(np.pMutateChangeActivations);
 
         var outcome = utilities.RouletteWheel.singleThrowArray(probabilities);
 
@@ -977,6 +977,9 @@
             case 4:
                 self.mutate_ConnectionWeights(np);
                 return 4;
+            case 5:
+                self.mutate_ChangeActivation(np);
+                return 5;
         }
     };
 
@@ -1015,7 +1018,21 @@
 
         var nodeLookup = neatGenome.Help.CreateGIDLookup(self.nodes);
 
+        //we could attempt to mutate the same node TWICE -- causing big issues, since we'll double add that node
 
+        var acnt = 0;
+        var attempts = 5;
+        //while we
+        while(acnt++ < attempts && existingNeuronGeneStruct && nodeLookup[existingNeuronGeneStruct.node.gid])
+        {
+            connectionToReplaceIdx = Math.floor(utilities.nextDouble() * self.connections.length);
+            connectionToReplace =  connToSplit || self.connections[connectionToReplaceIdx];
+            existingNeuronGeneStruct = newNodeTable[connectionToReplace.gid];
+        }
+
+        //we have failed to produce a new node to split!
+        if(acnt == attempts && existingNeuronGeneStruct && nodeLookup[existingNeuronGeneStruct.node.gid])
+            return;
 
         if(!existingNeuronGeneStruct)
         {	// No existing matching structure, so generate some new ID's.
@@ -1101,6 +1118,25 @@
         }
 
         return null;
+    };
+
+    //messes with the activation functions
+    exports.NeatGenome.prototype.mutate_ChangeActivation = function(np)
+    {
+        //let's select a node at random (so long as it's not an input)
+        var self = this;
+
+        for(var i=0; i < self.nodes.length; i++)
+        {
+            //not going to change the inputs
+            if(i < self.inputAndBiasNodeCount)
+                continue;
+
+            if(utilities.nextDouble() < np.pNodeMutateActivationRate)
+            {
+                self.nodes[i].activationFunction = cppnActivationFactory.getRandomActivationFunction();
+            }
+        }
     };
 
     //add a connection, sourcetargetconnect specifies the source, target or both nodes you'd like to connect (optionally)

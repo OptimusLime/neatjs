@@ -19,9 +19,11 @@
     var DEFAULT_P_MUTATE_CONNECTION_WEIGHTS = 0.988;
     var DEFAULT_P_MUTATE_ADD_NODE = 0.002;
     var DEFAULT_P_MUTATE_ADD_MODULE = 0.0;
-    var DEFAULT_P_MUTATE_ADD_CONNECTION = 0.02;
+    var DEFAULT_P_MUTATE_ADD_CONNECTION = 0.018;
+    var DEFAULT_P_MUTATE_CHANGE_ACTIVATIONS = 0.001;
     var DEFAULT_P_MUTATE_DELETE_CONNECTION = 0.001;
     var DEFAULT_P_MUTATE_DELETE_SIMPLENEURON = 0.00;
+    var DEFAULT_N_MUTATE_ACTIVATION = 0.01;
 
     //-----
     var DEFAULT_COMPATIBILITY_THRESHOLD = 8 ;
@@ -167,6 +169,8 @@
         self.pMutateAddConnection = DEFAULT_P_MUTATE_ADD_CONNECTION;
         self.pMutateDeleteConnection		= DEFAULT_P_MUTATE_DELETE_CONNECTION;
         self.pMutateDeleteSimpleNeuron	= DEFAULT_P_MUTATE_DELETE_SIMPLENEURON;
+        self.pMutateChangeActivations = DEFAULT_P_MUTATE_CHANGE_ACTIVATIONS;
+        self.pNodeMutateActivationRate = DEFAULT_N_MUTATE_ACTIVATION;
 
         //----- Build a default ConnectionMutationParameterGroupList.
         self.connectionMutationParameterGroupList = [];
