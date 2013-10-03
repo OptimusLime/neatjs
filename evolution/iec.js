@@ -120,6 +120,9 @@
                     //parent at index 0 responsible
                     responsibleParents.push(0);
 
+                    for(var m=0; m < postXOMutationCount; m++)
+                        ng.mutate(self.newNodes, self.newConnections, self.np);
+
                     break;
                 default:
                     //greater than 1 individual as a possible parent
