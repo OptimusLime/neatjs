@@ -951,7 +951,7 @@
         // Determine the type of mutation to perform.
         var probabilities = [];
         probabilities.push(np.pMutateAddNode);
-        probabilities.push(0);//np.pMutateAddModule);
+//        probabilities.push(0);//np.pMutateAddModule);
         probabilities.push(np.pMutateAddConnection);
         probabilities.push(np.pMutateDeleteConnection);
         probabilities.push(np.pMutateDeleteSimpleNeuron);
@@ -966,18 +966,17 @@
                 return 0;
             case 1:
 //               self.mutate_Ad Mutate_AddModule(ea);
-            case 2:
                 self.mutate_AddConnection(newConnectionTable,np);
+                return 1;
+            case 2:
+                self.mutate_DeleteConnection();
                 return 2;
             case 3:
-                self.mutate_DeleteConnection();
+                self.mutate_DeleteSimpleNeuronStructure(newConnectionTable, np);
                 return 3;
             case 4:
-                self.mutate_DeleteSimpleNeuronStructure(newConnectionTable, np);
-                return 4;
-            case 5:
                 self.mutate_ConnectionWeights(np);
-                return 5;
+                return 4;
         }
     };
 
