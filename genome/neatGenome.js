@@ -1134,7 +1134,7 @@
 
             if(utilities.nextDouble() < np.pNodeMutateActivationRate)
             {
-                self.nodes[i].activationFunction = cppnActivationFactory.getRandomActivationFunction().functionID;
+                self.nodes[i].activationFunction = cppnActivationFactory.Factory.getRandomActivationFunction().functionID;
             }
         }
     };
