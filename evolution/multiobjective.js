@@ -1,4 +1,28 @@
 //here we have everything for NSGA-II mutliobjective search and neatjs
+/**
+ * Module dependencies.
+ */
+
+var NeatGenome = require('../genome/neatGenome.js');
+var cppnjs = require('cppn');
+
+
+var CPPNactivationFactory = cppnjs.cppnActivationFactory;
+var utilities = cppnjs.utilities;
+
+/**
+ * Expose `NeatNode`.
+ */
+
+module.exports = Novelty;
+
+/**
+ * Initialize a new NeatNode.
+ *
+ * @param {Number} threshold
+ * @api public
+ */
+
 
 (function(exports, selfBrowser, isBrowser){
 

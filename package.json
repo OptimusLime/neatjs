@@ -6,7 +6,7 @@
         "email": "Paul.Szerlip@cs.ucf.edu",
         "url": "http://designforcode.com/" },
     "version": "0.2.2-5",
-    "main":"neatjs.js",
+    "main":"neat.js",
     "repository": {
         "type": "git",
         "url": "https://github.com/OptimusLime/neatjs.git"

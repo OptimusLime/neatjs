@@ -1,36 +1,46 @@
-(function(exports, selfBrowser, isBrowser){
+/**
+ * Module dependencies.
+ */
+//none
 
-//    var cantorPair = isBrowser ? selfBrowser['cantorPair'] : require('../utility/cantorPair.js');
+/**
+ * Expose `NeatNode`.
+ */
 
-    var neatNode = exports;
+module.exports = NeatNode;
 
-    exports.INPUT_LAYER = 0;
-    exports.OUTPUT_LAYER = 10;
+/**
+ * Initialize a new NeatNode.
+ *
+ * @param {String} gid
+ * @param {Object,String} aFunc
+ * @param {Number} layer
+ * @param {Object} typeObj
+ * @api public
+ */
+function NeatNode(gid, aFunc, layer, typeObj) {
 
-    exports.NeatNode = function(gid, aFunc, layer, typeObj) {
+    var self = this;
 
-        var self = this;
+    self.gid = (typeof gid === 'string' ? parseFloat(gid) : gid);
+    //we only story the string of the activation funciton
+    //let cppns deal with actual act functions
+    self.activationFunction = aFunc.functionID || aFunc;
 
-        self.gid = (typeof gid === 'string' ? parseFloat(gid) : gid);
-        //we only story the string of the activation funciton
-        //let cppns deal with actual act functions
-        self.activationFunction = aFunc.functionID || aFunc;
+    self.nodeType = typeObj.type;
 
-        self.nodeType = typeObj.type;
+    self.layer = (typeof layer === 'string' ? parseFloat(layer) : layer);
 
-        self.layer = (typeof layer === 'string' ? parseFloat(layer) : layer);
+    //TODO: Create step tests, include in constructor
+    self.step = 0;
 
-        //TODO: Create step tests, include in constructor
-        self.step = 0;
+    self.bias = 0;
+}
 
-        self.bias = 0;
-    };
+NeatNode.INPUT_LAYER = 0.0;
+NeatNode.OUTPUT_LAYER = 10.0;
 
-    exports.NeatNode.Copy = function(otherNode)
-    {
-        return new neatNode.NeatNode(otherNode.gid, otherNode.activationFunction, otherNode.layer, {type: otherNode.nodeType});
-    };
-
-
-    //send in the object, and also whetehr or not this is nodejs
-})(typeof exports === 'undefined'? this['neatjs']['neatNode']={}: exports, this, typeof exports === 'undefined'? true : false);
+NeatNode.Copy = function(otherNode)
+{
+    return new NeatNode(otherNode.gid, otherNode.activationFunction, otherNode.layer, {type: otherNode.nodeType});
+};
