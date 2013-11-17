@@ -1,64 +1,45 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title></title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" src="../cppnjs/cppnjs.js"></script>
-    <script type="text/javascript" src="../neatjs.js"></script>
-    <script type="text/javascript">
+    <meta charset="utf-8">
+    <title>Mocha Tests</title>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
+</head>
+<body>
+<div id="mocha"></div>
+<script src="../build/build.js"></script>
+<script src="../node_modules/mocha/mocha.js"></script>
+<script>mocha.setup('bdd')</script>
+<script>
+    window.onload = function() {
 
-        var globals = window;
-        $(window).ready(function()
-        {
-            var common = globals['common'];
-            var count =0;
-
-            var loadLibraries = function()
-            {
-                common.asyncLoadLibraries({'neatjs': '..', 'cppnjs': '../cppnjs'}, function(err){
-
-                    for(var library in common.scripts)
-                    {
-                        if(err)
-                        {
-                            console.log('ERROR LOADING');console.log(err);
-                            return;
-                        }
+        describe('NeatJS Load Stuff', function() {
+            'use strict';
 
 
-                        for(var script in common.scripts[library])
-                        {
-                            if(!globals[library][script])
-                                throw new Error("Failed browswer loading on script: " + script);
-                            else
-                                console.log('Successful: ' + script);
-                        }
+            it('should correctly load cppn', function(done) {
 
-                        //we should now have library all loaded!
-                        if(common.isLoaded)
-                            console.log('All loaded now!');
-                        else
-                            throw new Error("Failed browswer loading, not loaded!");
+                var cppnjs = require('cppnjs');
 
+                var cppnNode = cppnjs.cppnNode;
 
-                        console.log('To make the test better, you should check each component to see if they have their dependencies correctly set');
+                done();
+            });
 
-                    }
-                });
-            };
+            it('should correctly load neatjs', function(done) {
 
+                var neatjs = require('neatjs');
 
-            loadLibraries();
+                var neatGenome = neatjs.neatGenome;
 
+                console.log(neatGenome);
+
+                done();
+            });
         });
 
 
-
-
-    </script>
-</head>
-<body>
-
+        mocha.run();
+    };
+</script>
 </body>
 </html>
