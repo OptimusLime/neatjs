@@ -6,6 +6,7 @@ module.exports = neatjs;
 //nodes and connections!
 neatjs.neatNode = require('./genome/neatNode.js');
 neatjs.neatConnection = require('./genome/neatConnection.js');
+neatjs.neatGenome = require('./genome/neatGenome.js');
 
 //all the activations your heart could ever hope for
 neatjs.iec = require('./evolution/iec.js');
