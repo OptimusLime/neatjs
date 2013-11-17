@@ -1,7 +1,7 @@
 var assert = require('assert');
 var should = require('should');
 
-var neatConnection = require('../genome/neatConnection.js');
+var NeatConnection = require('../genome/neatConnection.js');
 
 describe('Creating a new connection',function(){
     var connection;
@@ -15,7 +15,7 @@ describe('Creating a new connection',function(){
     //test the other vanilla connection type
     before(function(done){
 
-        connection = new neatConnection.NeatConnection(gid, weight, {sourceID: sourceID, targetID: targetID});
+        connection = new NeatConnection(gid, weight, {sourceID: sourceID, targetID: targetID});
         done();
     });
 
@@ -30,7 +30,7 @@ describe('Creating a new connection',function(){
     //test the other stringify reversing functions
     before(function(done){
 
-        connection = new neatConnection.NeatConnection(gid.toString(), weight.toString(), {sourceID: sourceID.toString(), targetID: targetID.toString()});
+        connection = new NeatConnection(gid.toString(), weight.toString(), {sourceID: sourceID.toString(), targetID: targetID.toString()});
         done();
     });
 
@@ -44,8 +44,8 @@ describe('Creating a new connection',function(){
     //test the other vanilla connection type
     before(function(done){
 
-        connection = new neatConnection.NeatConnection(gid, weight, {sourceID: sourceID, targetID: targetID});
-        connection = neatConnection.NeatConnection.Copy(connection);
+        connection = new NeatConnection(gid, weight, {sourceID: sourceID, targetID: targetID});
+        connection = NeatConnection.Copy(connection);
         done();
     });
 

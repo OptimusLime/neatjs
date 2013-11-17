@@ -1,8 +1,8 @@
 var assert = require('assert');
 var should = require('should');
 
-var cppnjs = require('cppn');
-var utilities = cppnjs.loadLibraryFile('cppnjs', 'utilities');
+var cppnjs = require('cppnjs');
+var utilities = cppnjs.utilities;
 
 describe('Testing utilities.next()',function(){
 

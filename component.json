@@ -1,25 +1,27 @@
 {
-  "name": "neat",
+  "name": "neatjs",
   "repo": "OptimusLime/neatjs",
-  "description": "NeuroEvolution for Augmenting Topologies in Javascript",
-  "version": "0.2.0",
-  "keywords": [],
-  "dependencies": {},
+  "description": "NeuroEvolution of Augmenting Topologies (NEAT) implemented in Javascript (with tests done in Mocha for verification). Can be used as a node module or in a browser",
+  "version": "0.2.3",
+  "keywords": ["Neural Network", "NN", "Artificial Neural Networks", "ANN", "CPPN", "NEAT", "HyperNEAT"],
+  "dependencies": {
+    "OptimusLime/cppnjs" : "*"
+  },
   "development": {},
   "license": "MIT",
   "main": "neat.js",
   "scripts": [
     "neat.js",
-      "/evolution/iec.js",
-      "/evolution/multiobjective.js",
-      "/evolution/novelty.js",
-      "/genome/neatConnection.js",
-      "/genome/neatNode.js",
-      "/genome/neatGenome.js",
-      "/neatHelp/neatDecoder.js",
-      "/neatHelp/neatHelp.js",
-      "/neatHelp/neatParameters.js",
-      "/types/nodeType.js",
-      "/utility/genomeSharpToJS.js"
+      "./evolution/iec.js",
+      "./evolution/multiobjective.js",
+      "./evolution/novelty.js",
+      "./genome/neatConnection.js",
+      "./genome/neatNode.js",
+      "./genome/neatGenome.js",
+      "./neatHelp/neatDecoder.js",
+      "./neatHelp/neatHelp.js",
+      "./neatHelp/neatParameters.js",
+      "./types/nodeType.js",
+      "./utility/genomeSharpToJS.js"
   ]
 }

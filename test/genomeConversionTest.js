@@ -5,14 +5,6 @@ var util = require('util');
 var xml2js = require('xml2js');
 
 var genomeSharpToJS = require('../utility/genomeSharpToJS.js');
-var neatNode = require('../genome/neatNode.js');
-var neatConnection = require('../genome/neatConnection.js');
-var neatGenome = require('../genome/neatGenome.js');
-
-var cppnjs = require('cppn');
-var cppnConnection = cppnjs.loadLibraryFile('cppnjs', 'cppnConnection');// require('../cppnjs/components/cppnConnection.js');
-var cppnNode = cppnjs.loadLibraryFile('cppnjs', 'cppnNode');//require('../cppnjs/components/cppnNode.js');
-var cppnActivationFactory = cppnjs.loadLibraryFile('cppnjs', 'cppnActivationFactory');//require('../cppnjs/activationFunctions/cppnActivationFactory.js');
 
 describe('Testing C# to JS Genome converstion',function(){
 

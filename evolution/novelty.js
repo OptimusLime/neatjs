@@ -3,7 +3,7 @@
  */
 
 var NeatGenome = require('../genome/neatGenome.js');
-var utilities =  require('cppn').utilities;
+var utilities =  require('cppnjs').utilities;
 
 /**
  * Expose `NeatNode`.

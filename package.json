@@ -5,7 +5,7 @@
     "author" : { "name": "Paul Szerlip",
         "email": "Paul.Szerlip@cs.ucf.edu",
         "url": "http://designforcode.com/" },
-    "version": "0.2.2-5",
+    "version": "0.2.3",
     "main":"neat.js",
     "repository": {
         "type": "git",
@@ -14,11 +14,9 @@
     "bugs" : "https://github.com/OptimusLime/neatjs/issues",
     "license":"MIT",
     "dependencies": {
-        "cppn" : "0.x.x",
-        "xml2js" : "0.2.x"
+        "cppnjs" : "0.x.x"
     },
     "devDependencies": {
-        "cppn" : "0.x.x",
         "mocha": "1.1.x",
         "should": "1.1.x",
         "xml2js" : "0.2.x"

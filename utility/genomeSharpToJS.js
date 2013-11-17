@@ -53,7 +53,7 @@ converter.ConvertCSharpToJS = function(xmlGenome)
     for(var i=0; i < aNeurons.length; i++)
     {
         var csNeuron = aNeurons[i];
-        var jsNode = new NeatNode(csNeuron.id, csNeuron.activationFunction, csNeuron.layer, {type: genomeSharpToJS.NeuronTypeToNodeType(csNeuron.type)});
+        var jsNode = new NeatNode(csNeuron.id, csNeuron.activationFunction, csNeuron.layer, {type: converter.NeuronTypeToNodeType(csNeuron.type)});
         nodes.push(jsNode);
 
         if(csNeuron.type == 'in') inCount++;

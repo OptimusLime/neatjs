@@ -3,7 +3,7 @@
  */
 
 //pull in our cppn lib
-var cppnjs = require('cppn');
+var cppnjs = require('cppnjs');
 
 //grab our activation factory, cppn object and connections
 var CPPNactivationFactory = cppnjs.cppnActivationFactory;

@@ -1,21 +1,17 @@
 var assert = require('assert');
 var should = require('should');
 
+var cppnjs = require('cppnjs');
+var CPPNActivationFactory =  cppnjs.cppnActivationFactory;
 
-var cppnjs = require('cppn');
-
-var cppnActivationFunctions =  cppnjs.loadLibraryFile('cppnjs', 'cppnActivationFunctions');
-var cppnActivationFactory =  cppnjs.loadLibraryFile('cppnjs', 'cppnActivationFactory');
-var cppnNode =cppnjs.loadLibraryFile('cppnjs', 'cppnNode');
-
-var neatNode = require('../genome/neatNode.js');
-//var neatActivationFactory = require('../cppnjs/activationFunctions/cppnActivationFactory.js');
+var NodeType = require('../types/nodeType.js');
+var NeatNode = require('../genome/neatNode.js');
 
 var testActivation = function(functionString, value, functionValue)
 {
     var aFunc;
     before(function(done){
-        aFunc = cppnActivationFactory.Factory.getActivationFunction(functionString);
+        aFunc = CPPNActivationFactory.getActivationFunction(functionString);
         done();
     });
 
@@ -62,21 +58,21 @@ describe('Creating Activation Functions:',function(){
 //    it('Should have preloaded all functions now-- missing any means we dont have tests' ,function(done){
 //
 //        //if we aren't equal, we're not testing everything!
-//        activationFunctionIDs.length.should.equal(cppnActivationFactory.Factory.functions.length);
+//        activationFunctionIDs.length.should.equal(CPPNActivationFactory.functions.length);
 //        done();
 //    });
 //
 
     //finally, test out a fake activation function
     (function(){
-        var aFunc = cppnActivationFactory.Factory.getActivationFunction('FakeActivation')
+        var aFunc = CPPNActivationFactory.getActivationFunction('FakeActivation')
     }).should.throw("Activation Function doesn't exist!");
 });
 
 describe('Random Activation Test',function(){
     var aFunc;
     before(function(done){
-        aFunc = cppnActivationFactory.Factory.getRandomActivationFunction()
+        aFunc = CPPNActivationFactory.getRandomActivationFunction()
         done();
     });
 
@@ -104,40 +100,40 @@ describe('Creating a new node',function(){
     var gid = Math.floor(Math.random()*1000);
     var layer = 5;
     var aFunctionID = 'BipolarSigmoid';
-    var type = cppnNode.NodeType.hidden;
+    var type = NodeType.hidden;
 
 //  cantorPair tests invalid now
 //    before(function(done){
-//        aFunc = cppnActivationFactory.Factory.getActivationFunction(aFunctionID);
+//        aFunc = CPPNActivationFactory.getActivationFunction(aFunctionID);
 //        done();
 //    });
 //
 //    it('should be able to tell node type from gid, ins, and outs',function(){
 //
 //        gid = cantorPair.xy2cp(0,0);
-//        node = new neatNode.NeatNode(gid, aFunc, layer, {inCount: inCount, outCount: outCount});
-//        node.type.should.equal(cppnNode.NodeType.bias);
+//        node = new NeatNode(gid, aFunc, layer, {inCount: inCount, outCount: outCount});
+//        node.type.should.equal(NodeType.bias);
 //
 //        gid = cantorPair.xy2cp(1,1);
-//        node = new neatNode.NeatNode(gid, aFunc, layer, {inCount: inCount, outCount: outCount});
-//        node.type.should.equal(cppnNode.NodeType.input);
+//        node = new NeatNode(gid, aFunc, layer, {inCount: inCount, outCount: outCount});
+//        node.type.should.equal(NodeType.input);
 //
 //        gid = cantorPair.xy2cp(2,2);
-//        node = new neatNode.NeatNode(gid, aFunc, layer, {inCount: inCount, outCount: outCount});
-//        node.type.should.equal(cppnNode.NodeType.output);
+//        node = new NeatNode(gid, aFunc, layer, {inCount: inCount, outCount: outCount});
+//        node.type.should.equal(NodeType.output);
 //
 //        gid = cantorPair.xy2cp(3,3);
-//        node = new neatNode.NeatNode(gid, aFunc, layer, {inCount: inCount, outCount: outCount});
-//        node.type.should.equal(cppnNode.NodeType.hidden);
+//        node = new NeatNode(gid, aFunc, layer, {inCount: inCount, outCount: outCount});
+//        node.type.should.equal(NodeType.hidden);
 //
 //        gid = cantorPair.xy2cp(0,3);
-//        node = new neatNode.NeatNode(gid, aFunc, layer, {inCount: inCount, outCount: outCount});
-//        node.type.should.equal(cppnNode.NodeType.hidden);
+//        node = new NeatNode(gid, aFunc, layer, {inCount: inCount, outCount: outCount});
+//        node.type.should.equal(NodeType.hidden);
 //    });
 
     before(function(done){
-        aFunc = cppnActivationFactory.Factory.getActivationFunction(aFunctionID);
-        node = new neatNode.NeatNode(gid, aFunc, layer, {type: type});
+        aFunc = CPPNActivationFactory.getActivationFunction(aFunctionID);
+        node = new NeatNode(gid, aFunc, layer, {type: type});
         done();
     });
 
@@ -150,8 +146,8 @@ describe('Creating a new node',function(){
 
 
     before(function(done){
-        aFunc = cppnActivationFactory.Factory.getActivationFunction(aFunctionID);
-        node = new neatNode.NeatNode(gid.toString(), aFunc, layer.toString(), {type: type});
+        aFunc = CPPNActivationFactory.getActivationFunction(aFunctionID);
+        node = new NeatNode(gid.toString(), aFunc, layer.toString(), {type: type});
         done();
     });
 
@@ -171,12 +167,12 @@ describe('Copying a node',function(){
     var gid = 0;
     var layer = 5;
     var aFunctionID = 'BipolarSigmoid';
-    var type = cppnNode.NodeType.hidden;
+    var type = NodeType.hidden;
 
     before(function(done){
-        aFunc = cppnActivationFactory.Factory.getActivationFunction(aFunctionID);
-        node = new neatNode.NeatNode(gid, aFunc, layer, {type: type});
-        node = new neatNode.NeatNode.Copy(node);
+        aFunc = CPPNActivationFactory.getActivationFunction(aFunctionID);
+        node = new NeatNode(gid, aFunc, layer, {type: type});
+        node = NeatNode.Copy(node);
         done();
     });
 

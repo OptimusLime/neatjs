@@ -8,7 +8,7 @@ var Novelty = require('./novelty.js');
 
 
 //pull in variables from cppnjs
-var cppnjs = require('cppn');
+var cppnjs = require('cppnjs');
 var utilities =  cppnjs.utilities;
 
 

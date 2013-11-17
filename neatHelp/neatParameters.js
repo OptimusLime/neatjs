@@ -6,10 +6,7 @@
 /**
  * Expose `neatParameters`.
  */
-
-var neatParameters = {};
-
-module.exports = neatParameters;
+module.exports = NeatParameters;
 
 var	DEFAULT_POPULATION_SIZE = 150;
 var  DEFAULT_P_INITIAL_POPULATION_INTERCONNECTIONS = 1.00;//DAVID 0.05F;
@@ -53,7 +50,7 @@ var DEFAULT_CONNECTION_WEIGHT_RANGE = 10.0;
 
 var DEFAULT_ACTIVATION_PROBABILITY = 1.0;
 
-neatParameters.ConnectionPerturbationType =
+NeatParameters.ConnectionPerturbationType =
 {
     /// <summary>
     /// Reset weights.
@@ -70,7 +67,7 @@ neatParameters.ConnectionPerturbationType =
         /// </summary>
 //            jiggleND : 2
 };
-neatParameters.ConnectionSelectionType =
+NeatParameters.ConnectionSelectionType =
 {
     /// <summary>
     /// Select a proportion of the weights in a genome.
@@ -83,7 +80,7 @@ neatParameters.ConnectionSelectionType =
         fixedQuantity :1
 };
 
-neatParameters.ConnectionMutationParameterGroup = function(
+NeatParameters.ConnectionMutationParameterGroup = function(
      activationProportion,
      perturbationType,
      selectionType,
@@ -130,9 +127,9 @@ neatParameters.ConnectionMutationParameterGroup = function(
     self.sigma= sigma;
 };
 
-neatParameters.ConnectionMutationParameterGroup.Copy = function(copyFrom)
+NeatParameters.ConnectionMutationParameterGroup.Copy = function(copyFrom)
 {
-    return new neatParameters.ConnectionMutationParameterGroup(
+    return new NeatParameters.ConnectionMutationParameterGroup(
         copyFrom.ActivationProportion,
          copyFrom.PerturbationType,
            copyFrom.SelectionType,
@@ -143,7 +140,7 @@ neatParameters.ConnectionMutationParameterGroup.Copy = function(copyFrom)
     );
 };
 
-neatParameters.NeatParameters = function()
+function NeatParameters()
 {
     var self = this;
     self.histogramBins = [];
@@ -179,20 +176,20 @@ neatParameters.NeatParameters = function()
     //----- Build a default ConnectionMutationParameterGroupList.
     self.connectionMutationParameterGroupList = [];
 
-    self.connectionMutationParameterGroupList.push(new neatParameters.ConnectionMutationParameterGroup(0.125, neatParameters.ConnectionPerturbationType.jiggleEven,
-        neatParameters.ConnectionSelectionType.proportional, 0.5, 0, 0.05, 0.0));
+    self.connectionMutationParameterGroupList.push(new NeatParameters.ConnectionMutationParameterGroup(0.125, NeatParameters.ConnectionPerturbationType.jiggleEven,
+        NeatParameters.ConnectionSelectionType.proportional, 0.5, 0, 0.05, 0.0));
 
-    self.connectionMutationParameterGroupList.push(new neatParameters.ConnectionMutationParameterGroup(0.5, neatParameters.ConnectionPerturbationType.jiggleEven,
-        neatParameters.ConnectionSelectionType.proportional, 0.1, 0, 0.05, 0.0));
+    self.connectionMutationParameterGroupList.push(new NeatParameters.ConnectionMutationParameterGroup(0.5, NeatParameters.ConnectionPerturbationType.jiggleEven,
+        NeatParameters.ConnectionSelectionType.proportional, 0.1, 0, 0.05, 0.0));
 
-    self.connectionMutationParameterGroupList.push(new neatParameters.ConnectionMutationParameterGroup(0.125, neatParameters.ConnectionPerturbationType.jiggleEven,
-        neatParameters.ConnectionSelectionType.fixedQuantity, 0.0, 1, 0.05, 0.0));
+    self.connectionMutationParameterGroupList.push(new NeatParameters.ConnectionMutationParameterGroup(0.125, NeatParameters.ConnectionPerturbationType.jiggleEven,
+        NeatParameters.ConnectionSelectionType.fixedQuantity, 0.0, 1, 0.05, 0.0));
 
-    self.connectionMutationParameterGroupList.push(new neatParameters.ConnectionMutationParameterGroup(0.125, neatParameters.ConnectionPerturbationType.reset,
-        neatParameters.ConnectionSelectionType.proportional, 0.1, 0, 0.0, 0.0));
+    self.connectionMutationParameterGroupList.push(new NeatParameters.ConnectionMutationParameterGroup(0.125, NeatParameters.ConnectionPerturbationType.reset,
+        NeatParameters.ConnectionSelectionType.proportional, 0.1, 0, 0.0, 0.0));
 
-    self.connectionMutationParameterGroupList.push(new neatParameters.ConnectionMutationParameterGroup(0.125, neatParameters.ConnectionPerturbationType.reset,
-        neatParameters.ConnectionSelectionType.fixedQuantity, 0.0, 1, 0.0, 0.0));
+    self.connectionMutationParameterGroupList.push(new NeatParameters.ConnectionMutationParameterGroup(0.125, NeatParameters.ConnectionPerturbationType.reset,
+        NeatParameters.ConnectionSelectionType.fixedQuantity, 0.0, 1, 0.0, 0.0));
 
     //-----
     self.compatibilityThreshold = DEFAULT_COMPATIBILITY_THRESHOLD;
@@ -222,9 +219,10 @@ neatParameters.NeatParameters = function()
     self.activationProbabilities.push(0);
 };
 
-neatParameters.NeatParameters.Copy = function(copyFrom)
+NeatParameters.Copy = function(copyFrom)
 {
-    var self = this;
+    var self = new NeatParameters();
+
     //paul - joel originally
     self.noveltySearch = copyFrom.noveltySearch;
     self.noveltyHistogram = copyFrom.noveltyHistogram;
@@ -253,7 +251,7 @@ neatParameters.NeatParameters.Copy = function(copyFrom)
     // Copy the list.
     self.connectionMutationParameterGroupList = [];
     copyFrom.connectionMutationParameterGroupList.forEach(function(c){
-        self.connectionMutationParameterGroupList.push(neatParameters.ConnectionMutationParameterGroup.Copy(c));
+        self.connectionMutationParameterGroupList.push(NeatParameters.ConnectionMutationParameterGroup.Copy(c));
 
     });
 
@@ -275,6 +273,8 @@ neatParameters.NeatParameters.Copy = function(copyFrom)
     self.speciesDropoffAge = copyFrom.speciesDropoffAge;
 
     self.connectionWeightRange = copyFrom.connectionWeightRange;
+
+    return self;
 };
 
 
