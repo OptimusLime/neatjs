@@ -1,0 +1,25 @@
+{
+  "name": "neat",
+  "repo": "OptimusLime/neatjs",
+  "description": "NeuroEvolution for Augmenting Topologies in Javascript",
+  "version": "0.2.0",
+  "keywords": [],
+  "dependencies": {},
+  "development": {},
+  "license": "MIT",
+  "main": "neat.js",
+  "scripts": [
+    "neat.js",
+      "/evolution/iec.js",
+      "/evolution/multiobjective.js",
+      "/evolution/novelty.js",
+      "/genome/neatConnection.js",
+      "/genome/neatNode.js",
+      "/genome/neatGenome.js",
+      "/neatHelp/neatDecoder.js",
+      "/neatHelp/neatHelp.js",
+      "/neatHelp/neatParameters.js",
+      "/types/nodeType.js",
+      "/utility/genomeSharpToJS.js"
+  ]
+}

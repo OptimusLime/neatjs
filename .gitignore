@@ -17,3 +17,6 @@ packages
 _ReSharper.*
 *.resharper
 Ankh.NoLoad
+
+components
+build

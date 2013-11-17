@@ -1,85 +1,78 @@
-(function(exports, selfBrowser, isBrowser){
+//Convert between C# SharpNEAT Genotype encoded in XML into a JS genotype in JSON
+//pretty simple
 
-    //if we need a node object, this is how we would do it
-//    var cantorPair = isBrowser ? selfBrowser['cantorPair'] : require('../utility/cantorPair.js');
-    var genomeSharpToJS = exports;
+/**
+ * Module dependencies.
+ */
 
-    //load dependencies first
-    var cppnjs = isBrowser ? selfBrowser['common'] : require('cppn');
-    var neatjs = isBrowser ? selfBrowser['common'] : require('../neatjs.js');
+var NeatGenome = require('../genome/neatGenome.js');
+var NeatNode = require('../genome/neatNode.js');
+var NeatConnection = require('../genome/neatConnection.js');
+var NodeType = require('../types/nodeType.js');
 
 
-    var cppnNode = cppnjs.loadLibraryFile('cppnjs', 'cppnNode');
+/**
+ * Expose `GenomeConverter`.
+ */
 
-    var neatNode = neatjs.loadLibraryFile('neatjs', 'neatNode');
-    var neatConnection = neatjs.loadLibraryFile('neatjs', 'neatConnection');
-    var neatGenome = neatjs.loadLibraryFile('neatjs', 'neatGenome');
+var converter = {};
 
-    genomeSharpToJS.CheckDependencies = function()
+//we export the convert object, with two functions
+module.exports = converter;
+
+converter.NeuronTypeToNodeType = function(type)
+{
+    switch(type)
     {
-        //load from cppn library
-        cppnNode = cppnjs.loadLibraryFile('cppnjs', 'cppnNode');
+        case "bias":
+            return NodeType.bias;
+        case "in":
+            return NodeType.input;
+        case "out":
+            return NodeType.output;
+        case "hid":
+            return NodeType.hidden;
+        default:
+            throw new Error("inpropper C# neuron type detected");
+    }
+};
 
-        //load from neatjs library
-        neatNode = neatjs.loadLibraryFile('neatjs', 'neatNode');
-        neatConnection = neatjs.loadLibraryFile('neatjs', 'neatConnection');
-        neatGenome = neatjs.loadLibraryFile('neatjs', 'neatGenome');
-    };
+converter.ConvertCSharpToJS = function(xmlGenome)
+{
 
-    genomeSharpToJS.NeuronTypeToNodeType = function(type)
+    //we need to parse through a c# version of genome, and make a js genome from it
+
+    var aNeurons = xmlGenome['neurons']['neuron'] || xmlGenome['neurons'];
+    var aConnections = xmlGenome['connections']['connection'] || xmlGenome['connections'];
+
+
+    //we will use nodes and connections to make our genome
+    var nodes = [], connections = [];
+    var inCount = 0, outCount = 0;
+
+    for(var i=0; i < aNeurons.length; i++)
     {
-        switch(type)
-        {
-            case "bias":
-                return cppnNode.NodeType.bias;
-            case "in":
-                return cppnNode.NodeType.input;
-            case "out":
-                return cppnNode.NodeType.output;
-            case "hid":
-                return cppnNode.NodeType.hidden;
-        }
-    };
+        var csNeuron = aNeurons[i];
+        var jsNode = new NeatNode(csNeuron.id, csNeuron.activationFunction, csNeuron.layer, {type: genomeSharpToJS.NeuronTypeToNodeType(csNeuron.type)});
+        nodes.push(jsNode);
 
-    genomeSharpToJS.ConvertCSharpToJS = function(xmlGenome)
+        if(csNeuron.type == 'in') inCount++;
+        else if(csNeuron.type == 'out') outCount++;
+    }
+
+    for(var i=0; i < aConnections.length; i++)
     {
+        var csConnection = aConnections[i];
+        var jsConnection = new NeatConnection(csConnection['innov-id'], csConnection.weight, {sourceID:csConnection['src-id'], targetID: csConnection['tgt-id']});
+        connections.push(jsConnection);
+    }
 
-        //we need to parse through a c# version of genome, and make a js genome from it
+    var ng = new NeatGenome(xmlGenome['id'], nodes, connections, inCount, outCount);
+    ng.adaptable = (xmlGenome['adaptable'] == 'True');
+    ng.modulated = (xmlGenome['modulated'] == 'True');
+    ng.fitness = xmlGenome['fitness'];
+    ng.realFitness = xmlGenome['realfitness'];
+    ng.age = xmlGenome['age'];
 
-        var aNeurons = xmlGenome['neurons']['neuron'] || xmlGenome['neurons'];
-        var aConnections = xmlGenome['connections']['connection'] || xmlGenome['connections'];
-
-
-        //we will use nodes and connections to make our genome
-        var nodes = [], connections = [];
-        var inCount = 0, outCount = 0;
-
-        for(var i=0; i < aNeurons.length; i++)
-        {
-            var csNeuron = aNeurons[i];
-            var jsNode = new neatNode.NeatNode(csNeuron.id, csNeuron.activationFunction, csNeuron.layer, {type: genomeSharpToJS.NeuronTypeToNodeType(csNeuron.type)});
-            nodes.push(jsNode);
-
-            if(csNeuron.type == 'in') inCount++;
-            else if(csNeuron.type == 'out') outCount++;
-        }
-
-        for(var i=0; i < aConnections.length; i++)
-        {
-            var csConnection = aConnections[i];
-            var jsConnection = new neatConnection.NeatConnection(csConnection['innov-id'], csConnection.weight, {sourceID:csConnection['src-id'], targetID: csConnection['tgt-id']});
-            connections.push(jsConnection);
-        }
-
-        var ng = new neatGenome.NeatGenome(xmlGenome['id'], nodes, connections, inCount, outCount);
-        ng.adaptable = (xmlGenome['adaptable'] == 'True');
-        ng.modulated = (xmlGenome['modulated'] == 'True');
-        ng.fitness = xmlGenome['fitness'];
-        ng.realFitness = xmlGenome['realfitness'];
-        ng.age = xmlGenome['age'];
-
-        return ng;
-    };
-
-    //send in the object, and also whetehr or not this is nodejs
-})(typeof exports === 'undefined'? this['neatjs']['genomeSharpToJS']={}: exports, this, typeof exports === 'undefined'? true : false);
+    return ng;
+};
