@@ -12,7 +12,7 @@ var utilities = cppnjs.utilities;
 //neatjs imports
 var novelty = require('../evolution/novelty.js');
 var NeatConnection = require('./neatConnection.js');
-var NeatNode = require('./neatNode.js');
+var NeatNode = require('./neatNode.js'); 
 
 //help and params
 var neatHelp =  require('../neatHelp/neatHelp.js');
