@@ -12,12 +12,12 @@ var utilities = cppnjs.utilities;
 //neatjs imports
 var novelty = require('../evolution/novelty.js');
 var NeatConnection = require('./neatConnection.js');
-var NeatNode = require('./neatNode.js'); 
+var NeatNode = require('./neatNode.js');
 
 //help and params
 var neatHelp =  require('../neatHelp/neatHelp.js');
 var neatParameters =  require('../neatHelp/neatParameters.js');
-
+var neatDecoder =  require('../neatHelp/neatDecoder.js');
 
 
 //going to need to read node types appropriately
@@ -715,7 +715,6 @@ NeatGenome.prototype.createOffspringSexual
 NeatGenome.prototype.networkDecode = function(activationFn)
 {
     var self = this;
-    var neatDecoder =  neatjs.loadLibraryFile('neatjs', 'neatDecoder');
 
     return neatDecoder.DecodeToFloatFastConcurrentNetwork(self, activationFn);
 };

@@ -2,7 +2,7 @@
   "name": "neatjs",
   "repo": "OptimusLime/neatjs",
   "description": "NeuroEvolution of Augmenting Topologies (NEAT) implemented in Javascript (with tests done in Mocha for verification). Can be used as a node module or in a browser",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "keywords": ["Neural Network", "NN", "Artificial Neural Networks", "ANN", "CPPN", "NEAT", "HyperNEAT"],
   "dependencies": {
     "OptimusLime/cppnjs" : "*"
