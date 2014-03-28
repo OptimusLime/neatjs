@@ -1,24 +1,35 @@
 {
-    "name": "neatjs",
-    "description": "NeuroEvolution of Augmenting Topologies (NEAT) implemented in Javascript (with tests done in Mocha for verification). Can be used as a node module or in a browser",
-    "keywords": ["Neural Network", "NN", "Artificial Neural Networks", "ANN", "CPPN", "NEAT", "HyperNEAT"],
-    "author" : { "name": "Paul Szerlip",
-        "email": "Paul.Szerlip@cs.ucf.edu",
-        "url": "http://designforcode.com/" },
-    "version": "0.2.6",
-    "main":"neat.js",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/OptimusLime/neatjs.git"
-    },
-    "bugs" : "https://github.com/OptimusLime/neatjs/issues",
-    "license":"MIT",
-    "dependencies": {
-        "cppnjs" : "0.x.x"
-    },
-    "devDependencies": {
-        "mocha": "1.1.x",
-        "should": "1.1.x",
-        "xml2js" : "0.2.x"
-    }
+  "name": "neatjs",
+  "version": "0.3.0",
+  "description": "NeuroEvolution of Augmenting Topologies (NEAT) implemented in Javascript (with tests done in Mocha for verification). Can be used as a node module or in a browser",
+  "keywords": [
+    "Neural Network",
+    "NN",
+    "Artificial Neural Networks",
+    "ANN",
+    "CPPN",
+    "NEAT",
+    "HyperNEAT"
+  ],
+  "author": {
+    "name": "Paul Szerlip",
+    "email": "Paul.Szerlip@cs.ucf.edu",
+    "url": "http://designforcode.com/"
+  },
+  "main": "neat.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OptimusLime/neatjs.git"
+  },
+  "bugs": "https://github.com/OptimusLime/neatjs/issues",
+  "license": "MIT",
+  "dependencies": {
+    "cppnjs": "0.x.x",
+    "win-utils" : "*"
+  },
+  "devDependencies": {
+    "mocha": "1.1.x",
+    "should": "1.1.x",
+    "xml2js": "0.2.x"
+  }
 }

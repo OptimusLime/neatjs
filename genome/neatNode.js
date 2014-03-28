@@ -22,7 +22,8 @@ function NeatNode(gid, aFunc, layer, typeObj) {
 
     var self = this;
 
-    self.gid = (typeof gid === 'string' ? parseFloat(gid) : gid);
+    //gids are strings not numbers -- make it so
+    self.gid =  typeof gid === "number" ? "" + gid : gid;
     //we only story the string of the activation funciton
     //let cppns deal with actual act functions
     self.activationFunction = aFunc.functionID || aFunc;

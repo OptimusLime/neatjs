@@ -6,6 +6,7 @@ var CPPNActivationFactory =  cppnjs.cppnActivationFactory;
 
 var NodeType = require('../types/nodeType.js');
 var NeatNode = require('../genome/neatNode.js');
+// var uuid = require('win-utils').cuid;
 
 var testActivation = function(functionString, value, functionValue)
 {
@@ -138,7 +139,7 @@ describe('Creating a new node',function(){
     });
 
     it('should have a gid, activation, layer, and type',function(){
-        node.should.have.property('gid', gid);
+        node.should.have.property('gid', gid.toString());
         node.should.have.property('activationFunction',aFunc.functionID);
         node.should.have.property('layer',layer);
         node.should.have.property('nodeType',type);
@@ -147,12 +148,13 @@ describe('Creating a new node',function(){
 
     before(function(done){
         aFunc = CPPNActivationFactory.getActivationFunction(aFunctionID);
-        node = new NeatNode(gid.toString(), aFunc, layer.toString(), {type: type});
+        node = new NeatNode(gid, aFunc, layer.toString(), {type: type});
         done();
     });
 
-    it('should not be string version of gid, layer',function(){
-        node.gid.should.not.equal(gid.toString());
+    it('should not be number version of gid, or string version of layer',function(){
+        //gid is number, node.gid is string => shoudln't be equal
+        node.gid.should.not.equal(gid);
         node.layer.should.not.equal(layer.toString());
         (typeof node.activationFunction).should.equal('string');
     });
@@ -177,7 +179,7 @@ describe('Copying a node',function(){
     });
 
     it('should have copied gid, activation, layer, and type',function(){
-        node.should.have.property('gid', gid);
+        node.should.have.property('gid', gid.toString());
         node.should.have.property('activationFunction', aFunc.functionID);
         node.should.have.property('layer',layer);
         node.should.have.property('nodeType',type);

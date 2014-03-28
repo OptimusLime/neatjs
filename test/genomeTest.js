@@ -1,6 +1,6 @@
 var assert = require('assert');
 var should = require('should');
-
+var uuid = require('win-utils').cuid;
 
 console.log('Testing Neat Genome function by function')
 
@@ -76,7 +76,7 @@ describe('Creating a new genome',function(){
     {
         var bias = 0, ins = 0, outs = 0;
         ng.nodes.forEach(function(node){
-            (typeof node.gid).should.equal('number');
+            (typeof node.gid).should.equal('string');
             (typeof node.activationFunction).should.equal('string');
             (typeof node.layer).should.equal('number');
             (typeof node.nodeType).should.equal('string');
@@ -97,9 +97,9 @@ describe('Creating a new genome',function(){
         bias.should.equal(1);
 
         ng.connections.forEach(function(connection){
-            (typeof connection.gid).should.equal('number');
-            (typeof connection.sourceID).should.equal('number');
-            (typeof connection.targetID).should.equal('number');
+            (typeof connection.gid).should.equal('string');
+            (typeof connection.sourceID).should.equal('string');
+            (typeof connection.targetID).should.equal('string');
             (typeof connection.weight).should.equal('number');
 
             connection.weight.should.be.within(-weightRange/2, weightRange/2);
@@ -154,9 +154,9 @@ describe('Creating a new genome',function(){
             lastID = currentID;
         }
 
-        var reset = Math.floor(Math.random()*300);
-        NeatGenome.Help.resetInnovationID(reset);
-        NeatGenome.Help.currentInnovationID().should.equal(reset);
+        // var reset = Math.floor(Math.random()*300);
+        // NeatGenome.Help.resetInnovationID(reset);
+        // NeatGenome.Help.currentInnovationID().should.equal(reset);
         done();
     });
 
@@ -184,7 +184,10 @@ describe('Creating a new genome',function(){
 
             for(var j=1; j< connectionList.length; j++)
             {
-                connectionList[j].gid.should.be.above(lastID);
+                //the current id should be GREATER than the last id -- 
+                //therefore isLessThan should = false
+                uuid.isLessThan(connectionList[j].gid, lastID).should.equal(false);
+                // connectionList[j].gid.should.be.above(lastID);
                 lastID = connectionList[j].gid;
             }
         }
@@ -268,6 +271,18 @@ describe('Creating a new genome',function(){
 
     });
 
+    it('Help.nextInnovationID(): Should always return a string', function(done){
+
+
+        var nid = Math.floor(Math.random()*100000);
+        //nextinnovationID always returns a string -- same thing here
+        NeatGenome.Help.nextInnovationID(nid).should.equal(nid.toString());
+
+        //if you pass nothing, it should also be a string
+        (typeof NeatGenome.Help.nextInnovationID()).should.equal("string");
+
+        done();
+    });
 
     //test minimal genome function
     it('CreateGenomeByInnovation(): Creating a fully connected minimal genome', function(done){
@@ -279,7 +294,7 @@ describe('Creating a new genome',function(){
 
         //clear out genome IDs and innovation IDs
         NeatGenome.Help.resetGenomeID();
-        NeatGenome.Help.resetInnovationID();
+        // NeatGenome.Help.resetInnovationID();
 
         var ng = NeatGenome.Help.CreateGenomeByInnovation(ins,
             outs, {connectionProportion: connectionProportion, connectionWeightRange: weightRange});
@@ -301,7 +316,9 @@ describe('Creating a new genome',function(){
 
         //we should have created all nodes with new innovation IDs and all connections with IDs
 //        NeatGenome.Help.currentInnovationID().should.equal(ng.nodes.length + ng.connections.length);
-        NeatGenome.Help.nextInnovationID(ng.nodes.length + ng.connections.length).should.equal(ng.nodes.length + ng.connections.length);
+        var nid = ng.nodes.length + ng.connections.length;
+        //nextinnovationID always returns a string -- same thing here
+        NeatGenome.Help.nextInnovationID(nid).should.equal(nid.toString());
         done();
 
     });
@@ -311,7 +328,7 @@ describe('Creating a new genome',function(){
 
         //clear out genome IDs and innovation IDs
         NeatGenome.Help.resetGenomeID();
-        NeatGenome.Help.resetInnovationID();
+        // NeatGenome.Help.resetInnovationID();
         //want to test another connectionProportion -- only way to not fail is 0 proportion
         //nothing should be created
         var weightRange = 2;
@@ -328,7 +345,11 @@ describe('Creating a new genome',function(){
         ng.connections.length.should.equal(0);
 
         //we should have created all nodes with new innovation IDs and all connections with IDs
-        NeatGenome.Help.nextInnovationID(ng.nodes.length + ng.connections.length).should.equal(ng.nodes.length + ng.connections.length);
+        var nid = ng.nodes.length + ng.connections.length;
+        NeatGenome.Help.nextInnovationID(nid).should.equal(nid.toString());
+
+        nid = uuid();
+        NeatGenome.Help.nextInnovationID(nid).should.equal(nid);
 //        NeatGenome.Help.currentInnovationID().should.equal(ng.nodes.length + ng.connections.length);
 
         done();
@@ -1262,6 +1283,8 @@ describe('Creating a new genome',function(){
         //need some parameters to do some mutating yo, keep it standard
         var np = new NeatParameters();
         np.connectionWeightRange = weightRange;
+        //guaranteed to change activation on each node, means it s pretty impossible to not cause activation mutation
+        np.pNodeMutateActivationRate = 1;
 
         var testLength = 500;
         var newNodeTable = {};
@@ -1278,28 +1301,42 @@ describe('Creating a new genome',function(){
             lastMutation = ng.mutate(newNodeTable, newConnectionTable, np);
 
             //we check if something happened
-            var mutationOccured = false;
+            var mutationOccurred = false;
 
             //if the connections or nodes have increased, a quick easy way to determine if mutation happened!
-            mutationOccured = ng.nodes.length != metaInformation.nodeCount || ng.connections.length != metaInformation.connectionCount;
+            mutationOccurred = ng.nodes.length != metaInformation.nodeCount || ng.connections.length != metaInformation.connectionCount;
 
-            if(!mutationOccured)
+            if(!mutationOccurred)
             {
                 var weightMax = false;
                 //we have to go through the connections looking for weight changes
                 ng.connections.forEach(function(connection)
                 {
-                    mutationOccured = mutationOccured || connection.weight != frozenConnections[connection.gid].weight;
+                    mutationOccurred = mutationOccurred || connection.weight != frozenConnections[connection.gid].weight;
 
                     weightMax = weightMax || connection.weight == -weightRange/2 || connection.weight == weightRange/2;
                 });
 
                 //if no mutation occurred, there should be a weight that's at the max
-                mutationOccured = mutationOccured || weightMax;
+                mutationOccurred = mutationOccurred || weightMax;
             }
 
+            if(!mutationOccurred)
+            {
+                //check against activation types
+                ng.nodes.forEach(function(node)
+                {
+                    var frozenAct = frozenNodes[node.gid].activationFunction;
+                    
+                    mutationOccurred = mutationOccurred || node.activationFunction != frozenAct;
+                })
+            }
+
+            if(mutationOccurred == false)
+                console.log("Lsat mute type: ", lastMutation);
+
             //obviously, something should have happened!
-            mutationOccured.should.equal(true);
+            mutationOccurred.should.equal(true);
 
             //prep these guys for going again!
             frozenNodes = {}; frozenConnections = {}; metaInformation = {};
@@ -1417,7 +1454,7 @@ describe('Creating a new genome',function(){
     it('correlateConnectionListsByInnovation(): Part 1- should correlate two connection lists using gid', function(done){
 
         NeatGenome.Help.resetGenomeID();
-        NeatGenome.Help.resetInnovationID();
+        // NeatGenome.Help.resetInnovationID();
 
         var np = new NeatParameters();
         var ins = 3, outs = 2;
@@ -1428,7 +1465,7 @@ describe('Creating a new genome',function(){
         var ng1 = createSimpleGenome(ins, outs, np.connectionWeightRange, 1,existing);
 
         NeatGenome.Help.resetGenomeID();
-        NeatGenome.Help.resetInnovationID();
+        // NeatGenome.Help.resetInnovationID();
         var ng2 = createSimpleGenome(ins, outs, np.connectionWeightRange, 1,existing);
 
         //equal conns and nodes, should be!
@@ -1559,7 +1596,7 @@ describe('Creating a new genome',function(){
     it('correlateConnectionListsByInnovation(): Part 2- should correlate two connection lists using gid', function(done){
 
         NeatGenome.Help.resetGenomeID();
-        NeatGenome.Help.resetInnovationID();
+        // NeatGenome.Help.resetInnovationID();
 
         var np = new NeatParameters();
         var ins = 3, outs = 2;
@@ -1568,7 +1605,7 @@ describe('Creating a new genome',function(){
         var ng1 = createSimpleGenome(ins, outs, np.connectionWeightRange, 1, existing);
 
         NeatGenome.Help.resetGenomeID();
-        NeatGenome.Help.resetInnovationID();
+        // NeatGenome.Help.resetInnovationID();
         var ng2 = createSimpleGenome(ins, outs, np.connectionWeightRange, 1, existing);
 
         //equal conns and nodes, should be!
@@ -1692,7 +1729,7 @@ describe('Creating a new genome',function(){
     it('correlateConnectionListsByInnovation(): Part 3- should correlate with empty lists', function(done){
 
         NeatGenome.Help.resetGenomeID();
-        NeatGenome.Help.resetInnovationID();
+        // NeatGenome.Help.resetInnovationID();
 
         var np = new NeatParameters();
         var ins = 3, outs = 2;
@@ -1738,7 +1775,7 @@ describe('Creating a new genome',function(){
 //        connectionList, connectionTable, correlationItem, fitSwitch, combineDisjointExcessFlag)
 
         NeatGenome.Help.resetGenomeID();
-        NeatGenome.Help.resetInnovationID();
+        // NeatGenome.Help.resetInnovationID();
 
         var existing = {};
 
@@ -1748,7 +1785,7 @@ describe('Creating a new genome',function(){
         var ng1 = createSimpleGenome(3,2, np.connectionWeightRange, 1, existing);
 
         NeatGenome.Help.resetGenomeID();
-        NeatGenome.Help.resetInnovationID();
+        // NeatGenome.Help.resetInnovationID();
 
         //3 ins, 2 outs, 100% connected
         var ng2 = createSimpleGenome(3,2, np.connectionWeightRange, 1, existing);
@@ -1855,7 +1892,7 @@ describe('Creating a new genome',function(){
 
 
         NeatGenome.Help.resetGenomeID();
-        NeatGenome.Help.resetInnovationID();
+        // NeatGenome.Help.resetInnovationID();
 
         //fully connected, simple genome
         var ng = createSimpleGenome(4,3, 2, 1);
@@ -1880,7 +1917,7 @@ describe('Creating a new genome',function(){
     it('performIntegrityCheck(): should ensure connections are sorted properly', function(done){
 
         NeatGenome.Help.resetGenomeID();
-        NeatGenome.Help.resetInnovationID();
+        // NeatGenome.Help.resetInnovationID();
 
         //fully connected, simple genome
         var ng = createSimpleGenome(4,3, 2, 1);
@@ -1919,7 +1956,7 @@ describe('Creating a new genome',function(){
         var testCombinations = 100;
         for(var i=0 ; i < testCombinations; i++){
             NeatGenome.Help.resetGenomeID();
-            NeatGenome.Help.resetInnovationID();
+            // NeatGenome.Help.resetInnovationID();
             var existing = {};
 
             //lets create a genome
@@ -1930,7 +1967,7 @@ describe('Creating a new genome',function(){
             var originalLength = ng1.connections.length;
 
             NeatGenome.Help.resetGenomeID();
-            NeatGenome.Help.resetInnovationID();
+            // NeatGenome.Help.resetInnovationID();
 
             //3 ins, 2 outs, 100% connected
             var ng2 = createSimpleGenome(3,2, np.connectionWeightRange, 1, existing);
@@ -2010,7 +2047,7 @@ describe('Creating a new genome',function(){
         for(var i=0 ; i < testCombinations; i++){
             //We're going to create 2 genomes by hand, remove 2 connections from each, and measure their compatibility
             NeatGenome.Help.resetGenomeID();
-            NeatGenome.Help.resetInnovationID();
+            // NeatGenome.Help.resetInnovationID();
             var existing = {};
 
             //lets create a genome
@@ -2023,7 +2060,7 @@ describe('Creating a new genome',function(){
             var originalLength = ng1.connections.length;
 
             NeatGenome.Help.resetGenomeID();
-            NeatGenome.Help.resetInnovationID();
+            // NeatGenome.Help.resetInnovationID();
 
             //3 ins, 2 outs, 100% connected
             var ng2 = createSimpleGenome(3,2, np.connectionWeightRange, 1, existing);
@@ -2081,7 +2118,7 @@ describe('Creating a new genome',function(){
         for(var i=0 ; i < testCombinations; i++){
             //We're going to create 2 genomes by hand, remove 2 connections from each, and measure their compatibility
             NeatGenome.Help.resetGenomeID();
-            NeatGenome.Help.resetInnovationID();
+            // NeatGenome.Help.resetInnovationID();
             var existing = {};
 
             //lets create a genome
@@ -2094,7 +2131,7 @@ describe('Creating a new genome',function(){
             var originalLength = ng1.connections.length;
 
             NeatGenome.Help.resetGenomeID();
-            NeatGenome.Help.resetInnovationID();
+            // NeatGenome.Help.resetInnovationID();
 
             //3 ins, 2 outs, 100% connected
             var ng2 = createSimpleGenome(3,2, np.connectionWeightRange, 1, existing);
@@ -2157,7 +2194,7 @@ describe('Creating a new genome',function(){
         for(var i=0 ; i < testCombinations; i++){
             //We're going to create 2 genomes by hand, remove 2 connections from each, and measure their compatibility
             NeatGenome.Help.resetGenomeID();
-            NeatGenome.Help.resetInnovationID();
+            // NeatGenome.Help.resetInnovationID();
             var existing = {};
             //lets create a genome
             var np = new NeatParameters();
@@ -2169,7 +2206,7 @@ describe('Creating a new genome',function(){
             var originalLength = ng1.connections.length;
 
             NeatGenome.Help.resetGenomeID();
-            NeatGenome.Help.resetInnovationID();
+            // NeatGenome.Help.resetInnovationID();
 
             //3 ins, 2 outs, 100% connected
             var ng2 = createSimpleGenome(3,2, np.connectionWeightRange, 1, existing);

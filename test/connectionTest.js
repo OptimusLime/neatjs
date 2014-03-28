@@ -20,10 +20,10 @@ describe('Creating a new connection',function(){
     });
 
     it('should have matching gid, weight, source, and target',function(){
-        connection.gid.should.equal(gid);
+        connection.gid.should.equal(gid.toString());
         connection.weight.should.equal(weight);
-        connection.sourceID.should.equal(sourceID);
-        connection.targetID.should.equal(targetID);
+        connection.sourceID.should.equal(sourceID.toString());
+        connection.targetID.should.equal(targetID.toString());
     });
 
 
@@ -35,10 +35,10 @@ describe('Creating a new connection',function(){
     });
 
     it('should have not stringified gid, weight, source, and target',function(){
-        (typeof connection.gid).should.not.equal('string');
+        (typeof connection.gid).should.not.equal('number');
         (typeof connection.weight).should.not.equal('string');
-        (typeof connection.sourceID).should.not.equal('string');
-        (typeof connection.targetID).should.not.equal('string');
+        (typeof connection.sourceID).should.not.equal('number');
+        (typeof connection.targetID).should.not.equal('number');
     });
 
     //test the other vanilla connection type
@@ -50,10 +50,10 @@ describe('Creating a new connection',function(){
     });
 
     it('should have cloned gid, weight, source, and target',function(){
-        connection.gid.should.equal(gid);
+        connection.gid.should.equal(gid.toString());
         connection.weight.should.equal(weight);
-        connection.sourceID.should.equal(sourceID);
-        connection.targetID.should.equal(targetID);
+        connection.sourceID.should.equal(sourceID.toString());
+        connection.targetID.should.equal(targetID.toString());
     });
 
 });

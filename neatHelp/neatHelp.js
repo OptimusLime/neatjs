@@ -1,8 +1,7 @@
 /**
 * Module dependencies.
 */
-//none
-
+var uuid = require('win-utils').cuid;
 /**
 * Expose `neatHelp`.
 */
@@ -49,7 +48,7 @@ neatHelp.CorrelationResults = function()
 //TODO: Integrity check by GlobalID
 neatHelp.CorrelationResults.prototype.performIntegrityCheckByInnovation = function()
 {
-    var prevInnovationId= -1;
+    var prevInnovationId= "";
 
     var self = this;
 
@@ -69,14 +68,14 @@ neatHelp.CorrelationResults.prototype.performIntegrityCheckByInnovation = functi
                 }
                 if(correlationItem.connection1)
                 {
-                    if(correlationItem.connection1.gid<=prevInnovationId)
+                    if(uuid.isLessThan(correlationItem.connection1.gid, prevInnovationId) || correlationItem.connection1.gid == prevInnovationId)
                         return false;
 
                     prevInnovationId = correlationItem.connection1.gid;
                 }
                 else // ConnectionGene2 is present.
                 {
-                    if(correlationItem.connection2.gid<=prevInnovationId)
+                    if(uuid.isLessThan(correlationItem.connection2.gid, prevInnovationId) || correlationItem.connection2.gid == prevInnovationId)
                         return false;
 
                     prevInnovationId = correlationItem.connection2.gid;
@@ -94,7 +93,7 @@ neatHelp.CorrelationResults.prototype.performIntegrityCheckByInnovation = functi
                     return false;
 
                 // Innovation ID's should be in order and not duplicated.
-                if(correlationItem.connection1.gid <=prevInnovationId)
+                if(uuid.isLessThan(correlationItem.connection1.gid, prevInnovationId) || correlationItem.connection1.gid == prevInnovationId)
                     return false;
 
                 prevInnovationId = correlationItem.connection1.gid;

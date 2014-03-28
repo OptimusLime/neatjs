@@ -38,7 +38,7 @@ describe('Testing C# to JS Genome converstion',function(){
                 var node = ng.nodes[n];
                 var other = neurons[n];
 
-                node.gid.should.equal(parseFloat(other.id));
+                node.gid.should.equal((other.id));
                 node.activationFunction.should.equal(other.activationFunction);
                 node.layer.should.equal(parseFloat(other.layer));
                 node.nodeType.should.equal(genomeSharpToJS.NeuronTypeToNodeType(other.type));
@@ -49,10 +49,10 @@ describe('Testing C# to JS Genome converstion',function(){
                 var other = connections[c];
                 other.weight = parseFloat(other.weight);
 
-                conn.gid.should.equal(parseFloat(other['innov-id']))
+                conn.gid.should.equal((other['innov-id']))
                 parseFloat(conn.weight.toFixed(3)).should.equal(parseFloat(other.weight.toFixed(3)));
-                conn.sourceID.should.equal(parseFloat(other['src-id']));
-                conn.targetID.should.equal(parseFloat(other['tgt-id']));
+                conn.sourceID.should.equal((other['src-id']));
+                conn.targetID.should.equal((other['tgt-id']));
             }
 
             done();
