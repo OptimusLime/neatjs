@@ -626,8 +626,13 @@ NeatGenome.prototype.createOffspringSexual
             node = nodeLookup[connection.sourceID];
             if (node)
                 newNodeList.push(NeatNode.Copy(node));
-            else
+            else{
+                node = otherNodeLookup[connection.sourceID];
+                if(!node)
+                    throw new Error("Connection references source node that does not exist in either parent: " + JSON.stringify(connection));
+                
                 newNodeList.push(NeatNode.Copy(otherNodeLookup[connection.sourceID]));
+            }
             //newNeuronGeneList.Add(new NeuronGene(connectionGene.SourceNeuronId, NeuronType.Hidden, ActivationFunctionFactory.GetActivationFunction("SteepenedSigmoid")));
             newNodeTable[connection.sourceID] = node;
         }
@@ -639,8 +644,14 @@ NeatGenome.prototype.createOffspringSexual
             node = nodeLookup[connection.targetID];
             if (node != null)
                 newNodeList.push(NeatNode.Copy(node));
-            else
+           else{
+                node = otherNodeLookup[connection.sourceID];
+                if(!node)
+                    throw new Error("Connection references target node that does not exist in either parent: " + JSON.stringify(connection));
+
                 newNodeList.push(NeatNode.Copy(otherNodeLookup[connection.targetID]));
+            }
+                
             //newNeuronGeneList.Add(new NeuronGene(connectionGene.TargetNeuronId, NeuronType.Hidden, ActivationFunctionFactory.GetActivationFunction("SteepenedSigmoid")));
             newNodeTable[connection.targetID] = node;
         }
