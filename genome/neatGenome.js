@@ -645,7 +645,7 @@ NeatGenome.prototype.createOffspringSexual
             if (node != null)
                 newNodeList.push(NeatNode.Copy(node));
            else{
-                node = otherNodeLookup[connection.sourceID];
+                node = otherNodeLookup[connection.targetID];
                 if(!node)
                     throw new Error("Connection references target node that does not exist in either parent: " + JSON.stringify(connection));
 

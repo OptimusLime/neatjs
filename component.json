@@ -1,6 +1,6 @@
 {
   "name": "neatjs",
-  "version": "0.3.0-1",
+  "version": "0.3.0-2",
   "description": "NeuroEvolution of Augmenting Topologies (NEAT) implemented in Javascript (with tests done in Mocha for verification). Can be used as a node module or in a browser",
   "repo": "OptimusLime/neatjs",
   "keywords": [
