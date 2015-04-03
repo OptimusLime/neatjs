@@ -13,8 +13,8 @@
     "HyperNEAT"
   ],
   "dependencies": {
-    "optimuslime/cppnjs": "master",
-    "optimuslime/win-utils": "master"
+    "optimuslime/cppnjs": "0.2.x",
+    "optimuslime/win-utils": "0.x.x"
   },
   "development": {},
   "license": "MIT",
